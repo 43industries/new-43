@@ -4,7 +4,7 @@ const functions = [
   {
     name: "integrated_ecosystem",
     returnType: "Network",
-    desc: "Our three divisions feed each other. Fintech enables crypto settlement; crypto liquidity supports precious metal tokenization. One company, three entry points.",
+    desc: "Fintech owns rails, ledger events, and compliance telemetry; Digital Assets consumes those signals for settlement and custody; Metals & Markets anchors physical and listed exposure. Custody and audit trails reconcile through one reporting fabric.",
     returnVal: '"unified_value_network"',
     returnClass: "str",
     delay: 0,

@@ -22,6 +22,8 @@ const divisions = [
       { name: "banking_api", method: ".connect()" },
       { name: "financial_inclusion", method: ".deploy()" },
     ],
+    infraStack:
+      "rails → core API → compliance → observability",
     linkColor: "var(--orange)",
     delay: 0,
   },
@@ -44,6 +46,7 @@ const divisions = [
       { name: "crypto_portfolio", method: ".manage()" },
       { name: "blockchain_treasury", method: ".run()" },
     ],
+    infraStack: "chains → custody → settlement router → risk controls",
     linkColor: "var(--purple)",
     delay: 0.1,
   },
@@ -66,6 +69,7 @@ const divisions = [
       { name: "etf_shelf", method: ".core()" },
       { name: "vault_storage", method: ".secure()" },
     ],
+    infraStack: "sourcing → vault → tokenization → markets desk",
     linkColor: "var(--gold)",
     delay: 0.2,
   },
@@ -181,6 +185,14 @@ export default function Divisions() {
                     </li>
                   ))}
                 </ul>
+                <div
+                  className="text-[10px] leading-[1.75] mb-4 pl-0.5"
+                  style={{ color: "var(--white-dim)", opacity: 0.88 }}
+                >
+                  <span style={{ color: d.nameColor }}>stack</span>
+                  <span style={{ opacity: 0.4 }}> — </span>
+                  {d.infraStack}
+                </div>
                 <a
                   href="#contact"
                   className="text-[11px] tracking-[1px] no-underline flex items-center gap-2 cursor-none transition-all duration-200 hover:gap-3.5"
