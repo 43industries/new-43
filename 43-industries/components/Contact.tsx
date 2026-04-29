@@ -65,7 +65,7 @@ export default function Contact() {
                 </option>
                 <option style={{ background: "var(--bg2)" }}>&quot;Fintech &amp; Payments&quot;</option>
                 <option style={{ background: "var(--bg2)" }}>&quot;Crypto / XRP&quot;</option>
-                <option style={{ background: "var(--bg2)" }}>&quot;Precious Metals&quot;</option>
+                <option style={{ background: "var(--bg2)" }}>&quot;Metals, Stocks &amp; ETFs&quot;</option>
                 <option style={{ background: "var(--bg2)" }}>&quot;General Partnership&quot;</option>
                 <option style={{ background: "var(--bg2)" }}>&quot;Institutional / Investor&quot;</option>
               </select>
@@ -105,7 +105,8 @@ export default function Contact() {
             <InfoBlock title="system.status">
               <InfoItem k="fintech" v='"ACTIVE"' vColor="var(--green)" />
               <InfoItem k="crypto_xrp" v='"ACTIVE"' vColor="var(--green)" />
-              <InfoItem k="precious_metals" v='"ACTIVE"' vColor="var(--green)" />
+              <InfoItem k="metals_markets" v='"ACTIVE"' vColor="var(--green)" />
+              <InfoItem k="stocks_etfs" v='"ACTIVE"' vColor="var(--green)" />
               <InfoItem k="partnerships" v='"OPEN"' vColor="var(--gold)" />
             </InfoBlock>
             <InfoBlock title="response_time">

@@ -19,8 +19,8 @@ const metrics = [
   },
   {
     label: "assets.count()",
-    val: "4",
-    sub: "asset classes",
+    val: "6",
+    sub: "product lines",
     color: "var(--gold)",
     shadow: "rgba(251,191,36,.3)",
     delay: 0.2,

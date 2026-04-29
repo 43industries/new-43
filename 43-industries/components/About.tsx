@@ -70,8 +70,8 @@ export default function About() {
                   On top of that, we run an{" "}
                   <span style={{ color: "var(--green)" }}>XRP-led crypto division</span>{" "}
                   leveraging RippleNet for fast, low-cost cross-border settlement, and a{" "}
-                  <span style={{ color: "var(--gold)" }}>precious metals</span> division
-                  offering gold, silver, and copper as hard-asset wealth protection.
+                  <span style={{ color: "var(--gold)" }}>metals &amp; markets</span> division
+                  — LBMA bullion plus listed stocks and ETFs alongside gold, silver, and copper.
                 </>,
                 <>
                   Three divisions. One import.{" "}
@@ -159,6 +159,8 @@ export default function About() {
                   { pkg: "fintech", ver: "3.1.4" },
                   { pkg: "xrp_ledger", ver: "1.5.9" },
                   { pkg: "precious_metals", ver: "2.0.1" },
+                  { pkg: "listed_equities", ver: "1.0.0" },
+                  { pkg: "etf_core", ver: "1.0.0" },
                   { pkg: "ripplenet", ver: "4.2.0" },
                   { pkg: "gold_custody", ver: "1.8.3" },
                 ].map((p) => (

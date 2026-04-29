@@ -45,8 +45,9 @@ export default function Hero() {
             Three interconnected divisions —{" "}
             <span style={{ color: "var(--cyan)" }}>fintech</span>,{" "}
             <span style={{ color: "var(--purple)" }}>digital assets</span>, and{" "}
-            <span style={{ color: "var(--gold)" }}>precious metals</span> — building
-            the infrastructure of tomorrow&apos;s economy from Nairobi, Kenya.
+            <span style={{ color: "var(--gold)" }}>metals &amp; markets</span>{" "}
+            (bullion, stocks, ETFs) — building the infrastructure of tomorrow&apos;s
+            economy from Nairobi, Kenya.
           </p>
 
           <div className="flex gap-4 flex-wrap">

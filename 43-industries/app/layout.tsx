@@ -10,9 +10,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "43industries — init()",
+  title: "43 Industries — Next-Gen Wealth | Fintech · Crypto · Metals · Stocks & ETFs",
   description:
-    "Three interconnected divisions — fintech, digital assets, and precious metals — building the infrastructure of tomorrow's economy from Nairobi, Kenya.",
+    "Nairobi-based wealth company: fintech, multi-chain crypto, precious metals, plus listed stocks and ETFs. Shop, invest, and build with 43 Industries.",
 };
 
 export default function RootLayout({
