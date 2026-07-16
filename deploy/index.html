@@ -841,9 +841,16 @@ html.world-open,body.world-open{overflow:hidden !important}
 /* metals showcase */
 .metals-showcase{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:56px}
 .metal-card{background:rgba(28,31,36,0.88);border:1px solid var(--border);border-radius:4px;overflow:hidden;backdrop-filter:blur(12px);transition:border-color .3s,transform .3s}
-.metal-card:hover{border-color:rgba(255,106,0,.5);transform:translateY(-4px)}
-.metal-card-top{padding:32px 20px 20px;text-align:center;border-bottom:1px solid var(--border);background:rgba(37,40,48,0.9)}
-.metal-icon{font-size:38px;margin-bottom:10px;font-family:'Orbitron',monospace;font-weight:900;color:var(--orange)}
+.metal-card:hover{border-color:rgba(212,175,55,.5);transform:translateY(-4px)}
+.metal-card-top{border-bottom:1px solid var(--border);background:rgba(37,40,48,0.9)}
+.metal-visual{aspect-ratio:16/10;width:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.metal-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(20,22,26,.55) 100%);pointer-events:none}
+.metal-card[data-metal="GOLD"] .metal-visual{background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(212,175,55,.28),transparent 70%),linear-gradient(160deg,#1a1814,#252830)}
+.metal-card[data-metal="SILVER"] .metal-visual{background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(180,190,205,.22),transparent 70%),linear-gradient(160deg,#16181c,#252830)}
+.metal-card[data-metal="COPPER"] .metal-visual{background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(184,115,51,.28),transparent 70%),linear-gradient(160deg,#1a1410,#252830)}
+.metal-visual svg{width:68%;max-width:200px;height:auto;position:relative;z-index:1;filter:drop-shadow(0 14px 22px rgba(0,0,0,.45));transition:transform .35s ease}
+.metal-card:hover .metal-visual svg{transform:translateY(-4px) scale(1.03)}
+.metal-card-meta{padding:14px 20px 18px;text-align:center}
 .metal-sym{font-family:'Orbitron',monospace;font-size:20px;font-weight:900;color:var(--div-mt);margin-bottom:4px}
 .metal-purity{font-size:9px;color:var(--white-dim);letter-spacing:2px}
 .metal-card-body{padding:20px}
@@ -2250,9 +2257,96 @@ body.world-metals-active #matrix{opacity:.05}
     <!-- OVERVIEW -->
     <div class="dw-panel active" id="mt-overview">
       <div class="metals-showcase">
-        <div class="metal-card"><div class="metal-card-top"><div class="metal-icon">Au</div><div class="metal-sym">GOLD</div><div class="metal-purity">24K · .9999 FINE</div></div><div class="metal-card-body"><div class="metal-spec"><span class="sk">spot_price</span><span class="sv" id="msp-GOLD">$2,341 / oz</span></div><div class="metal-spec"><span class="sk">certification</span><span class="sv">LBMA · Hallmarked</span></div><div class="metal-spec"><span class="sk">available_sizes</span><span class="sv">1oz · 10oz · 1kg</span></div><div class="metal-spec"><span class="sk">storage_option</span><span class="sv">Vault or Delivery</span></div><div class="metal-spec"><span class="sk">tokenized</span><span class="sv">Yes — on-chain</span></div></div></div>
-        <div class="metal-card"><div class="metal-card-top"><div class="metal-icon">Ag</div><div class="metal-sym">SILVER</div><div class="metal-purity">.999 FINE</div></div><div class="metal-card-body"><div class="metal-spec"><span class="sk">spot_price</span><span class="sv" id="msp-SILVER">$27.14 / oz</span></div><div class="metal-spec"><span class="sk">certification</span><span class="sv">Hallmarked · Assay</span></div><div class="metal-spec"><span class="sk">available_sizes</span><span class="sv">1oz · 10oz · 100oz</span></div><div class="metal-spec"><span class="sk">storage_option</span><span class="sv">Vault or Delivery</span></div><div class="metal-spec"><span class="sk">tokenized</span><span class="sv">Yes — on-chain</span></div></div></div>
-        <div class="metal-card"><div class="metal-card-top"><div class="metal-icon">Cu</div><div class="metal-sym">COPPER</div><div class="metal-purity">.9999 FINE</div></div><div class="metal-card-body"><div class="metal-spec"><span class="sk">spot_price</span><span class="sv" id="msp-COPPER">$4.52 / lb</span></div><div class="metal-spec"><span class="sk">certification</span><span class="sv">Investment Grade</span></div><div class="metal-spec"><span class="sk">available_sizes</span><span class="sv">1kg · 5kg · 10kg</span></div><div class="metal-spec"><span class="sk">storage_option</span><span class="sv">Delivery</span></div><div class="metal-spec"><span class="sk">tokenized</span><span class="sv">Coming soon</span></div></div></div>
+        <div class="metal-card" data-metal="GOLD">
+          <div class="metal-card-top">
+            <div class="metal-visual" aria-hidden="true">
+              <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="auTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f5e6a8"/><stop offset="55%" stop-color="#d4af37"/><stop offset="100%" stop-color="#a68728"/></linearGradient>
+                  <linearGradient id="auLeft" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c9a227"/><stop offset="100%" stop-color="#6e5414"/></linearGradient>
+                  <linearGradient id="auRight" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8c96a"/><stop offset="100%" stop-color="#8a6b1c"/></linearGradient>
+                </defs>
+                <ellipse cx="100" cy="98" rx="62" ry="10" fill="rgba(0,0,0,.35)"/>
+                <path d="M40 58 L100 34 L160 58 L100 82 Z" fill="url(#auTop)" stroke="rgba(245,230,168,.55)" stroke-width="1"/>
+                <path d="M40 58 L100 82 L100 102 L40 78 Z" fill="url(#auLeft)"/>
+                <path d="M160 58 L100 82 L100 102 L160 78 Z" fill="url(#auRight)"/>
+                <path d="M70 52 L100 40 L130 52 L100 64 Z" fill="rgba(255,248,220,.22)" stroke="rgba(255,248,220,.35)" stroke-width=".8"/>
+                <text x="100" y="58" text-anchor="middle" font-family="Orbitron,monospace" font-size="11" font-weight="700" fill="#3d2e0a" opacity=".85">1 oz</text>
+              </svg>
+            </div>
+            <div class="metal-card-meta">
+              <div class="metal-sym">GOLD</div>
+              <div class="metal-purity">24K · .9999 FINE</div>
+            </div>
+          </div>
+          <div class="metal-card-body">
+            <div class="metal-spec"><span class="sk">spot_price</span><span class="sv" id="msp-GOLD">$2,341 / oz</span></div>
+            <div class="metal-spec"><span class="sk">certification</span><span class="sv">LBMA · Hallmarked</span></div>
+            <div class="metal-spec"><span class="sk">available_sizes</span><span class="sv">1oz · 10oz · 1kg</span></div>
+            <div class="metal-spec"><span class="sk">storage_option</span><span class="sv">Vault or Delivery</span></div>
+            <div class="metal-spec"><span class="sk">tokenized</span><span class="sv">Yes — on-chain</span></div>
+          </div>
+        </div>
+        <div class="metal-card" data-metal="SILVER">
+          <div class="metal-card-top">
+            <div class="metal-visual" aria-hidden="true">
+              <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="agTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f2f4f7"/><stop offset="50%" stop-color="#c5cbd4"/><stop offset="100%" stop-color="#9aa3b0"/></linearGradient>
+                  <linearGradient id="agLeft" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a8b0bc"/><stop offset="100%" stop-color="#5c646e"/></linearGradient>
+                  <linearGradient id="agRight" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dce1e8"/><stop offset="100%" stop-color="#7a8490"/></linearGradient>
+                </defs>
+                <ellipse cx="100" cy="98" rx="62" ry="10" fill="rgba(0,0,0,.35)"/>
+                <path d="M40 58 L100 34 L160 58 L100 82 Z" fill="url(#agTop)" stroke="rgba(255,255,255,.45)" stroke-width="1"/>
+                <path d="M40 58 L100 82 L100 102 L40 78 Z" fill="url(#agLeft)"/>
+                <path d="M160 58 L100 82 L100 102 L160 78 Z" fill="url(#agRight)"/>
+                <path d="M70 52 L100 40 L130 52 L100 64 Z" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.3)" stroke-width=".8"/>
+                <text x="100" y="58" text-anchor="middle" font-family="Orbitron,monospace" font-size="11" font-weight="700" fill="#2a3038" opacity=".8">1 oz</text>
+              </svg>
+            </div>
+            <div class="metal-card-meta">
+              <div class="metal-sym">SILVER</div>
+              <div class="metal-purity">.999 FINE</div>
+            </div>
+          </div>
+          <div class="metal-card-body">
+            <div class="metal-spec"><span class="sk">spot_price</span><span class="sv" id="msp-SILVER">$27.14 / oz</span></div>
+            <div class="metal-spec"><span class="sk">certification</span><span class="sv">Hallmarked · Assay</span></div>
+            <div class="metal-spec"><span class="sk">available_sizes</span><span class="sv">1oz · 10oz · 100oz</span></div>
+            <div class="metal-spec"><span class="sk">storage_option</span><span class="sv">Vault or Delivery</span></div>
+            <div class="metal-spec"><span class="sk">tokenized</span><span class="sv">Yes — on-chain</span></div>
+          </div>
+        </div>
+        <div class="metal-card" data-metal="COPPER">
+          <div class="metal-card-top">
+            <div class="metal-visual" aria-hidden="true">
+              <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="cuTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8a06a"/><stop offset="50%" stop-color="#b87333"/><stop offset="100%" stop-color="#8a4a1c"/></linearGradient>
+                  <linearGradient id="cuLeft" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a05a28"/><stop offset="100%" stop-color="#4a2810"/></linearGradient>
+                  <linearGradient id="cuRight" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4894a"/><stop offset="100%" stop-color="#6b3614"/></linearGradient>
+                </defs>
+                <ellipse cx="100" cy="98" rx="62" ry="10" fill="rgba(0,0,0,.35)"/>
+                <path d="M40 58 L100 34 L160 58 L100 82 Z" fill="url(#cuTop)" stroke="rgba(232,160,106,.5)" stroke-width="1"/>
+                <path d="M40 58 L100 82 L100 102 L40 78 Z" fill="url(#cuLeft)"/>
+                <path d="M160 58 L100 82 L100 102 L160 78 Z" fill="url(#cuRight)"/>
+                <path d="M70 52 L100 40 L130 52 L100 64 Z" fill="rgba(255,220,180,.18)" stroke="rgba(255,220,180,.3)" stroke-width=".8"/>
+                <text x="100" y="58" text-anchor="middle" font-family="Orbitron,monospace" font-size="11" font-weight="700" fill="#2e1608" opacity=".85">1 kg</text>
+              </svg>
+            </div>
+            <div class="metal-card-meta">
+              <div class="metal-sym">COPPER</div>
+              <div class="metal-purity">.9999 FINE</div>
+            </div>
+          </div>
+          <div class="metal-card-body">
+            <div class="metal-spec"><span class="sk">spot_price</span><span class="sv" id="msp-COPPER">$4.52 / lb</span></div>
+            <div class="metal-spec"><span class="sk">certification</span><span class="sv">Investment Grade</span></div>
+            <div class="metal-spec"><span class="sk">available_sizes</span><span class="sv">1kg · 5kg · 10kg</span></div>
+            <div class="metal-spec"><span class="sk">storage_option</span><span class="sv">Delivery</span></div>
+            <div class="metal-spec"><span class="sk">tokenized</span><span class="sv">Coming soon</span></div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- STACK -->
