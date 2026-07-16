@@ -1,6 +1,6 @@
 # 43 Industries — technical infrastructure checklist
 
-This document complements the **stack.py** views in [`deploy/index.html`](deploy/index.html). Use it for domain, deploy, and operational hygiene.
+This document covers domain, deploy, and the **admin-managed shop catalog** (Supabase).
 
 ## Domain and DNS
 
@@ -11,12 +11,129 @@ This document complements the **stack.py** views in [`deploy/index.html`](deploy
 ## Deploy (static `deploy/`)
 
 - Prefer **Git-connected production deploys** (push to `main` → build) so production matches the repo without manual CLI steps.
-- Keep **one** canonical production project; document which Vercel project (or other host) owns the custom domain.
+- Keep **one** canonical production project; document which Vercel project owns the custom domain.
+- Public site: `/` (`index.html`). Admin catalog: `/admin.html` (not linked in the public nav — bookmark it).
+
+## Shop catalog (Supabase)
+
+The shop no longer uses hardcoded products. Catalog + stock live in Supabase.
+
+### One-time setup
+
+1. Create a free project at [supabase.com](https://supabase.com).
+2. In **SQL Editor**, run the schema below.
+3. **Authentication → Users → Add user** — create your admin email/password (this is admin access).
+4. **Project Settings → API** — copy **Project URL** and **anon public** key into [`deploy/config.js`](deploy/config.js):
+
+```js
+window.SITE_CONFIG = {
+  SUPABASE_URL: 'https://YOUR_REF.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJ...',
+};
+```
+
+5. Deploy `deploy/` (including `config.js`, `admin.html`, `js/shop-api.js`).
+6. Open `https://yoursite/admin.html`, sign in, add products.
+
+**Never** commit or paste the **service_role** key into the frontend.
+
+### Schema + RLS (run in SQL Editor)
+
+```sql
+create extension if not exists "pgcrypto";
+
+create table if not exists public.products (
+  id uuid primary key default gen_random_uuid(),
+  sku text not null unique,
+  category text not null default 'general',
+  name text not null,
+  description text default '',
+  price_usd numeric(12,2) not null default 0,
+  stock int not null default 0 check (stock >= 0),
+  badge text,
+  image_url text,
+  published boolean not null default true,
+  sort_order int default 0,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.products enable row level security;
+
+-- Public shop: read published only
+create policy "Public read published products"
+  on public.products for select
+  to anon, authenticated
+  using (published = true);
+
+-- Authenticated admins: read all (including unpublished)
+create policy "Authenticated read all products"
+  on public.products for select
+  to authenticated
+  using (true);
+
+-- Authenticated: insert / update / delete
+create policy "Authenticated insert products"
+  on public.products for insert
+  to authenticated
+  with check (true);
+
+create policy "Authenticated update products"
+  on public.products for update
+  to authenticated
+  using (true)
+  with check (true);
+
+create policy "Authenticated delete products"
+  on public.products for delete
+  to authenticated
+  using (true);
+```
+
+Note: If two SELECT policies conflict oddly in your project, keep a single SELECT for `anon` (`published = true`) and a separate one for `authenticated` (`true`). Supabase ORs permissive policies for the same role.
+
+Optional: disable public sign-ups under **Authentication → Providers → Email** → turn off “Enable sign ups” so only users you create in the dashboard can log into admin.
+
+### Admin workflow
+
+1. Go to `/admin.html`
+2. Sign in with the Auth user you created
+3. Add / edit products (SKU, category, name, description, price USD, stock, badge, **image URL**, published)
+4. Unpublish hides an item from the public shop without deleting it
+5. Sign out when finished
+
+Public shop respects `stock` (sold out / qty cap). Checkout does **not** yet decrement stock on the server.
+
+### Product photos (image URL)
+
+- In Admin, paste a **public HTTPS** image URL into **Image URL** (Cloudinary, ImgBB, your CDN, etc.).
+- Preview appears in the form when the URL loads. Broken / private URLs fall back to initials on the shop.
+- Recommended: ~800×800 (or similar square) product photo, JPEG/WebP/PNG.
+- Do not use hotlinked pages that block hotlinking; host images where `img src` is allowed from your site.
+
+### First products checklist
+
+For each real SKU you add in Admin:
+
+| Field | Example |
+|-------|---------|
+| SKU | `AU-1OZ-001` (unique) |
+| Category | `metals`, `hardware`, `merch`, … |
+| Name | Short customer-facing name |
+| Description | 1–2 lines |
+| Price USD | Numeric |
+| Stock | Integer ≥ 0 |
+| Badge | optional (`NEW`, `LBMA`, …) |
+| Image URL | `https://…` public photo |
+| Published | on for shop visibility |
+
+Add a few published items, then open `/#shop` — photos and stock should appear without redeploying.
+
+Until Supabase is configured (or the table has no published rows), the public shop falls back to a **built-in demo catalog** so `#shop` is never empty.
 
 ## Next.js app (`43-industries/`)
 
-- Run `npm run build` locally before release; CI should run the same (see [.github/workflows/ci-next.yml](.github/workflows/ci-next.yml)).
-- Pin Node version in CI to match local/Vercel (e.g. 20.x).
+- Secondary until the static deploy design is locked.
+- Run `npm run build` locally before release if you ship that app.
 
 ## Forms and edge
 
@@ -25,20 +142,17 @@ This document complements the **stack.py** views in [`deploy/index.html`](deploy
 
 ## Secrets
 
-- Do **not** commit API keys, signing keys, or webhooks secrets into the repo.
-- If you add serverless or API routes later, inject secrets via the host’s environment variable UI.
+- Do **not** commit service-role keys, signing keys, or webhook secrets.
+- Frontend may only use the **anon** key + project URL.
 
 ## Observability
 
-- Enable host analytics or an external uptime check on the production URL after domain cutover.
-- If you add backends, add structured logging and error tracking (e.g. Sentry) as a follow-up.
+- Enable host analytics or an uptime check on the production URL after domain cutover.
 
-## Division stacks (reference)
+## Division stacks (marketing reference)
 
-| Division           | Layers (marketing model)                                        |
-|-------------------|------------------------------------------------------------------|
-| Fintech           | Rails → core platform → compliance → observability               |
-| Digital assets    | Chain plane → custody → settlement router → risk                 |
-| Metals & markets  | Sourcing → vault & logistics → tokenization → markets desk     |
-
-Final integrations vary by **corridor, licensing, and partner**; keep public copy aligned with what you can substantiate.
+| Division           | Layers                                                          |
+|--------------------|-----------------------------------------------------------------|
+| Fintech            | Rails → core platform → compliance → observability            |
+| Digital assets     | Chain plane → custody → settlement router → risk                |
+| Metals & markets   | Sourcing → vault & logistics → tokenization → markets desk    |

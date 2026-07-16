@@ -1,8 +1,20 @@
-# 43 Industries — Cyberpunk Design System
+# 43 Industries — Design System
 
-> Nairobi-built wealth terminal. Three divisions — fintech, digital assets, metals & markets — rendered as a midnight server room where data glows.
+> Nairobi-built wealth company. Three divisions — fintech, digital assets, metals & markets — in a **lighter charcoal** interface with one electric accent.
 
-**References (taste, not clones):** [Refero Neon](https://styles.refero.design/style/cc38369a-41e3-4bcd-b619-230ccffe7e8e), [Linear](https://styles.refero.design/style/90ce5883-bb24-4466-93f7-801cd617b0d1), [Max Yinger](https://styles.refero.design/style/a7891223-a93e-4731-a1aa-4079f1ee928b)
+---
+
+## Voice
+
+**Plain brand English.** No Python/terminal roleplay: no `.py` filenames, no `$` shell prompts, no `class Product(Shop):`, no `pip install`, no `enter_world()` as UI labels.
+
+| Do | Don't |
+|----|--------|
+| Home, About, Shop, Explore divisions | `main.py`, `shop.py`, `explore_divisions()` |
+| Add to cart, Send message | `add()`, `send_message.py` |
+| Overview / Stack / Tools tabs | `overview.py` |
+
+JetBrains Mono is for **prices and data**, not a pretend IDE costume.
 
 ---
 
@@ -10,73 +22,91 @@
 
 | Token | Value | Role |
 |-------|-------|------|
-| `--surface-0` | `#050005` | Page void |
-| `--surface-1` | `#0a0010` | Depth layer |
-| `--surface-2` | `#151617` | Card / terminal body (Neon Graphite) |
-| `--surface-3` | `#1f1028` | Elevated panels |
-| `--orange` | `#ff6a00` | Primary action, crypto |
-| `--purple` | `#c084fc` | Fintech |
-| `--gold` | `#ff9f43` | Metals & markets |
-| `--hud-cyan` | `#00f0ff` | HUD lines, scan accents (low opacity only) |
-| `--white` | `#f0e8ff` | Primary text |
-| `--white-dim` | `#94979e` | Body / metadata (Neon Pewter) |
+| `--surface-0` / `--bg` | `#14161a` | Page charcoal (lighter than pure void) |
+| `--surface-1` / `--bg2` | `#1c1f24` | Depth |
+| `--surface-2` / `--bg3` | `#252830` | Cards / panels |
+| `--surface-3` / `--bg4` | `#2e323a` | Elevated |
+| `--orange` | `#ff6a00` | Site brand accent — nav, hero CTAs, LIVE, shop, price-up |
+| `--on-accent` | `#ffffff` | Text on orange buttons |
+| `--white` / `--ink` | `#f0ebe6` | Primary text |
+| `--white-dim` / `--ink-dim` | `#9a9ea6` | Body / metadata |
+| `--red` | `#ff5e5e` | Price-down / errors only |
 
-**Do:** Use surface steps for elevation. **Don't:** Stack heavy box-shadows on dark UI.
+**Do:** Soft black / charcoal. Orange is the company brand accent.  
+**Don't:** Flat pure-white marketing pages. Don't use purple / cyan / gold for general site chrome.
+
+### Division identity exception
+
+Scoped to homepage **doors** and **division world shells** (not global UI):
+
+| Division | Token | Value | Icon |
+|----------|-------|-------|------|
+| Fintech | `--div-ft` | `#9b5cff` | Lightning bolt |
+| Digital Assets | `--div-da` | `#2ee6d6` | Hex crystal / node |
+| Metals & Markets | `--div-mt` | `#d4af37` | Stacked bullion |
+
+Monoline SVG icons; fill/stroke from the matching `--div-*`. Chain asset marks keep product colors.
 
 ---
 
 ## Typography
 
-- **Display:** Orbitron 900 — headlines, metrics. Tight tracking (`-0.02em` to `-0.04em` on large sizes).
-- **UI / code:** JetBrains Mono — labels, terminal copy, data.
-- **Do:** Mono for all telemetry, prices, HUD labels. **Don't:** Orbitron on body paragraphs.
+- **Display:** Orbitron 900 — headlines, metrics. Tight tracking on large sizes.
+- **Body / UI:** DM Sans — paragraphs, buttons, nav.
+- **Data:** JetBrains Mono — prices, badges, HUD labels.
+- Body paragraphs: ~14–15px, `--white-dim`.
 
 ---
 
 ## Spacing & shape
 
 - Base unit: **4px**
-- Panel radius: **4px** (cards, terminals, inputs)
-- Primary CTA radius: **9999px** (pill) — Neon tension vs sharp panels
-- Section padding: 60–100px desktop; 24px mobile
-- Card padding: 24–28px
+- Panel radius: **4px**
+- Primary CTA: **pill (9999px)** — prefer pill for primary only
+- Section padding: 60–100px desktop; ~48–64px vertical on mobile
 
 ---
 
-## Components
+## Icons
 
-### Division door card
-- HUD bar: traffic dots + `*.py` filename + `● ONLINE`
-- One hero metric per division
-- Live micro-strip (prices / savings)
-- Pill `enter_world()` CTA — **always visible**
-- Division accent: purple / orange / gold
+Monoline SVG (1.5px stroke, `currentColor`) for brand UI. No emoji.
 
-### Primary button (`.btn-run`, `.door-cta`)
-- Pill shape, accent fill, neon ring on hover
-- **Do:** One primary per card section. **Don't:** Multiple competing glows.
+| Location | Treatment |
+|----------|-----------|
+| Division doors | Quiet monoline in ring — **Fintech** = three rails, **Digital Assets** = chain link, **Metals & Markets** = bullion bar |
+| World cards | Small SVG or title-only |
+| Shop | Category mark or `image_url` |
+| Team | Initials in graphite square |
+| **Crypto asset marks** | Official-style filled SVG logos (BTC / ETH / SOL / TRX / XRP) with **product brand colors** |
 
-### Sparkline / ticker
-- Tabular nums, mono font
-- Neon stroke + subtle glow on canvas
-- Pulse class on price update (`.price-flash-up` / `.price-flash-down`)
+Hero isometric tower marks use the same three division metaphors as the door glyphs.
 
-### Motion
-- Glitch / scanline on headings only
-- `prefers-reduced-motion: reduce` disables glitch, parallax, carousel auto-scroll
+**Asset-mark exception:** Chain logos may use their product colors (`--chain-btc` `#F7931A`, `--chain-eth` `#627EEA`, `--chain-sol` `#9945FF`, `--chain-trx` `#FF0013`, `--chain-xrp` `#E5E5E5`). These are identity colors for third-party assets — not a second site brand accent. Site chrome stays charcoal + orange.
 
 ---
 
-## Accessibility
+## Shop & admin catalog
 
-- Body copy on `--white-dim` against `--surface-*` — minimum 4.5:1 where possible
-- Decorative glow on headings only
-- Division cards: `tabindex="0"`, Enter/Space opens world
-- Touch: no custom cursor; CTAs visible without hover
+- **Source of truth:** Supabase `products` table (not hardcoded JS).
+- **Public shop:** reads published rows; respects stock.
+- **Admin:** [`admin.html`](admin.html) — Auth login, CRUD. Not linked in public nav.
+- Config: [`config.js`](config.js) — `SUPABASE_URL` + `SUPABASE_ANON_KEY` only (never service-role key).
+
+---
+
+## Motion
+
+- Restrained glow on brand + primary CTA only.
+- Ambient: CSS hero grid / glow drift.
+- Scroll reveals + hero entrance: **GSAP + ScrollTrigger** (CDN).
+- `prefers-reduced-motion: reduce` disables ambient animations and skips GSAP timelines.
+- **Home hero:** brand-first copy left; right side = **isometric foundation graphic** (orange 43 Industries plinth + three division towers with depth faces) — not flat boxes, not a stats card. Quiet location line + headline + one sub + CTAs. Division doors carry atmosphere + metric whisper + unique `--div-*` color/icon per division + enter CTA.
 
 ---
 
 ## Files
 
 - Production: `deploy/index.html`
+- Admin: `deploy/admin.html`
+- Shared API: `deploy/js/shop-api.js`
 - This contract: `deploy/DESIGN.md`

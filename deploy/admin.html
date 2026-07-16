@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>43 Industries — Catalog Admin</title>
+<meta name="theme-color" content="#050005"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --surface-0: #050005;
+  --surface-1: #0c0c0e;
+  --surface-2: #151617;
+  --surface-3: #1c1d1f;
+  --orange: #ff6a00;
+  --orange-dim: #cc5200;
+  --orange-faint: rgba(255,106,0,0.08);
+  --white: #f0ebe6;
+  --white-dim: #94979e;
+  --red: #ff5e5e;
+  --border: rgba(255,106,0,0.15);
+  --border-bright: rgba(255,106,0,0.35);
+  --radius: 4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--surface-0);
+  color:var(--white);
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+  line-height:1.5;
+  min-height:100vh;
+}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+.hidden{display:none !important}
+
+/* Layout */
+.shell{max-width:1200px;margin:0 auto;padding:24px 20px 48px}
+.centered{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.panel{
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:32px;
+  width:100%;
+  max-width:420px;
+}
+.panel-wide{max-width:560px}
+
+/* Typography */
+.brand{
+  font-family:'Orbitron',monospace;
+  font-weight:900;
+  font-size:clamp(18px,4vw,24px);
+  color:var(--orange);
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+.subtitle{color:var(--white-dim);font-size:12px;margin-bottom:24px}
+h2{font-family:'Orbitron',monospace;font-weight:700;font-size:14px;letter-spacing:.5px;margin-bottom:20px}
+
+/* Forms */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;color:var(--white-dim);margin-bottom:6px;letter-spacing:.3px}
+.field input,.field textarea,.field select{
+  width:100%;
+  background:var(--surface-1);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  color:var(--white);
+  padding:10px 12px;
+  outline:none;
+  transition:border-color .15s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--border-bright)}
+.field textarea{min-height:88px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-check{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.field-check input{width:auto;accent-color:var(--orange)}
+.field-check label{margin:0;color:var(--white);font-size:12px}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:10px 18px;border-radius:var(--radius);border:1px solid var(--border);
+  background:var(--surface-1);color:var(--white);cursor:pointer;
+  font-size:12px;letter-spacing:.3px;transition:background .15s,border-color .15s,color .15s;
+}
+.btn:hover{background:var(--orange-faint);border-color:var(--border-bright)}
+.btn-primary{background:var(--orange);border-color:var(--orange);color:var(--surface-0);font-weight:600}
+.btn-primary:hover{background:var(--orange-dim);border-color:var(--orange-dim)}
+.btn-ghost{background:transparent}
+.btn-sm{padding:6px 12px;font-size:11px}
+.btn-danger{color:var(--red);border-color:rgba(255,94,94,.3)}
+.btn-danger:hover{background:rgba(255,94,94,.08);border-color:var(--red)}
+.btn-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.btn-block{width:100%}
+
+/* Messages */
+.msg{padding:10px 12px;border-radius:var(--radius);font-size:12px;margin-bottom:16px}
+.msg-error{background:rgba(255,94,94,.1);border:1px solid rgba(255,94,94,.3);color:var(--red)}
+.msg-info{background:var(--orange-faint);border:1px solid var(--border);color:var(--white-dim)}
+.msg-success{background:rgba(255,106,0,.08);border:1px solid var(--border);color:var(--orange)}
+
+/* Header */
+.header{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.header h1{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(16px,3.5vw,20px);
+  color:var(--orange);letter-spacing:.5px;
+}
+
+/* Toolbar */
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+
+/* Table */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface-2)}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+th{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);font-weight:500;background:var(--surface-1)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,106,0,.03)}
+td.name{max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td.price{font-variant-numeric:tabular-nums;color:var(--orange)}
+td.actions{white-space:nowrap}
+td.actions .btn{margin-right:4px}
+.badge-pub{display:inline-block;padding:2px 8px;border-radius:var(--radius);font-size:10px;letter-spacing:.5px}
+.badge-pub.yes{background:var(--orange-faint);color:var(--orange);border:1px solid var(--border)}
+.badge-pub.no{background:var(--surface-1);color:var(--white-dim);border:1px solid var(--border)}
+
+/* Empty state */
+.empty{padding:48px 24px;text-align:center;color:var(--white-dim)}
+.empty p{margin-bottom:16px;font-size:13px}
+
+/* Modal */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(5,0,5,.85);z-index:100;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:24px 16px;overflow-y:auto;
+}
+.modal{
+  background:var(--surface-2);border:1px solid var(--border-bright);
+  border-radius:var(--radius);width:100%;max-width:560px;
+  padding:28px;margin-top:max(0px,calc(50vh - 280px));
+}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal-head h2{margin:0}
+.modal-close{background:none;border:none;color:var(--white-dim);cursor:pointer;font-size:20px;line-height:1;padding:4px}
+.modal-close:hover{color:var(--orange)}
+
+/* Loading */
+.loading{color:var(--white-dim);font-size:12px;padding:24px;text-align:center}
+
+/* Config notice */
+.config-notice{max-width:520px}
+.config-notice code{background:var(--surface-1);padding:2px 6px;border-radius:var(--radius);font-size:11px}
+
+/* Image URL preview */
+.field-hint{font-size:10px;line-height:1.55;color:var(--white-dim);margin-top:6px}
+.img-preview-wrap{
+  margin-top:12px;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface-1);height:160px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;position:relative;
+}
+.img-preview-wrap img{max-width:100%;max-height:100%;object-fit:contain;display:none}
+.img-preview-wrap img.show{display:block}
+.img-preview-wrap .img-preview-empty{font-size:11px;color:var(--white-dim);padding:16px;text-align:center}
+.img-preview-wrap.has-image .img-preview-empty{display:none}
+
+@media (max-width:600px){
+  .shell{padding:16px 12px 32px}
+  .panel{padding:24px 20px}
+  .field-row{grid-template-columns:1fr}
+  .header{flex-direction:column;align-items:flex-start}
+  td.actions .btn{display:block;margin:4px 0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<div id="view-config" class="centered hidden">
+  <div class="panel config-notice">
+    <div class="brand">43 Industries</div>
+    <p class="subtitle">Catalog Admin</p>
+    <div class="msg msg-info">
+      Supabase is not configured. Copy <code>config.example.js</code> → <code>config.js</code> and paste your
+      <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code>.
+      See <a href="../INFRA.md">INFRA.md</a> for setup steps.
+    </div>
+  </div>
+</div>
+
+<div id="view-login" class="centered hidden">
+  <div class="panel">
+    <div class="brand">43 Industries</div>
+    <p class="subtitle">Catalog Admin — Sign in</p>
+    <div id="login-error" class="msg msg-error hidden"></div>
+    <form id="login-form">
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" name="email" required autocomplete="username"/>
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" name="password" required autocomplete="current-password"/>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="login-btn">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<div id="view-dashboard" class="hidden">
+  <div class="shell">
+    <header class="header">
+      <h1>43 Industries — Catalog Admin</h1>
+      <button type="button" class="btn btn-ghost btn-sm" id="signout-btn">Sign out</button>
+    </header>
+
+    <div class="toolbar">
+      <button type="button" class="btn btn-primary" id="add-product-btn">Add product</button>
+    </div>
+
+    <div id="dashboard-error" class="msg msg-error hidden"></div>
+    <div id="products-loading" class="loading hidden">Loading products...</div>
+    <div id="products-empty" class="empty hidden">
+      <p>No products yet.</p>
+      <button type="button" class="btn btn-primary" id="add-first-btn">Add product</button>
+    </div>
+    <div id="products-table-wrap" class="table-wrap hidden">
+      <table>
+        <thead>
+          <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price USD</th>
+            <th>Stock</th>
+            <th>Published</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="products-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="product-modal" class="modal-backdrop hidden">
+  <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-head">
+      <h2 id="modal-title">Add product</h2>
+      <button type="button" class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div id="modal-error" class="msg msg-error hidden"></div>
+    <form id="product-form">
+      <input type="hidden" id="product-id"/>
+      <div class="field-row">
+        <div class="field">
+          <label for="product-sku">SKU</label>
+          <input type="text" id="product-sku" required/>
+        </div>
+        <div class="field">
+          <label for="product-category">Category</label>
+          <input type="text" id="product-category" value="general" required/>
+        </div>
+      </div>
+      <div class="field">
+        <label for="product-name">Name</label>
+        <input type="text" id="product-name" required/>
+      </div>
+      <div class="field">
+        <label for="product-description">Description</label>
+        <textarea id="product-description"></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="product-price">Price USD</label>
+          <input type="number" id="product-price" min="0" step="0.01" value="0" required/>
+        </div>
+        <div class="field">
+          <label for="product-stock">Stock</label>
+          <input type="number" id="product-stock" min="0" step="1" value="0" required/>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="product-badge">Badge</label>
+          <input type="text" id="product-badge" placeholder="Optional"/>
+        </div>
+        <div class="field">
+          <label for="product-sort">Sort order</label>
+          <input type="number" id="product-sort" step="1" value="0"/>
+        </div>
+      </div>
+      <div class="field">
+        <label for="product-image">Image URL</label>
+        <input type="url" id="product-image" placeholder="https://yoursite.com/product.jpg" autocomplete="off"/>
+        <p class="field-hint">Paste a public HTTPS URL (Cloudinary, ImgBB, your CDN, etc.). Recommended ~800×800 product photo. Leave blank to show initials on the shop.</p>
+        <div class="img-preview-wrap" id="image-preview-wrap" aria-live="polite">
+          <img id="image-preview" alt="Product preview"/>
+          <div class="img-preview-empty" id="image-preview-empty">Preview appears when the URL loads</div>
+        </div>
+      </div>
+      <div class="field-check">
+        <input type="checkbox" id="product-published" checked/>
+        <label for="product-published">Published</label>
+      </div>
+      <div class="btn-group">
+        <button type="submit" class="btn btn-primary" id="save-product-btn">Save</button>
+        <button type="button" class="btn" id="cancel-product-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="js/shop-api.js"></script>
+<script>
+(function () {
+  var API = window.ShopAPI;
+  var products = [];
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var views = {
+    config: $('view-config'),
+    login: $('view-login'),
+    dashboard: $('view-dashboard'),
+  };
+
+  function showView(name) {
+    Object.keys(views).forEach(function (k) {
+      views[k].classList.toggle('hidden', k !== name);
+    });
+  }
+
+  function showEl(el, visible) {
+    el.classList.toggle('hidden', !visible);
+  }
+
+  function setText(el, text) {
+    el.textContent = text;
+    showEl(el, !!text);
+  }
+
+  function formatPrice(n) {
+    return '$' + Number(n).toFixed(2);
+  }
+
+  function isAuthError(err) {
+    var msg = (err && err.message) ? err.message.toLowerCase() : '';
+    return msg.indexOf('jwt') !== -1 ||
+      msg.indexOf('not signed in') !== -1 ||
+      msg.indexOf('unauthorized') !== -1 ||
+      msg.indexOf('invalid') !== -1 && msg.indexOf('token') !== -1;
+  }
+
+  function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  /* ---- Products list ---- */
+
+  function renderProducts() {
+    var tbody = $('products-tbody');
+    var loading = $('products-loading');
+    var empty = $('products-empty');
+    var wrap = $('products-table-wrap');
+
+    showEl(loading, false);
+
+    if (!products.length) {
+      showEl(empty, true);
+      showEl(wrap, false);
+      tbody.innerHTML = '';
+      return;
+    }
+
+    showEl(empty, false);
+    showEl(wrap, true);
+
+    tbody.innerHTML = products.map(function (p) {
+      var pubClass = p.published ? 'yes' : 'no';
+      var pubLabel = p.published ? 'Yes' : 'No';
+      var pubBtn = p.published ? 'Unpublish' : 'Publish';
+      return '<tr data-id="' + escapeHtml(p.id) + '">' +
+        '<td>' + escapeHtml(p.sku) + '</td>' +
+        '<td class="name" title="' + escapeHtml(p.name) + '">' + escapeHtml(p.name) + '</td>' +
+        '<td>' + escapeHtml(p.category) + '</td>' +
+        '<td class="price">' + formatPrice(p.price) + '</td>' +
+        '<td>' + p.stock + '</td>' +
+        '<td><span class="badge-pub ' + pubClass + '">' + pubLabel + '</span></td>' +
+        '<td class="actions">' +
+          '<button type="button" class="btn btn-sm btn-edit" data-id="' + escapeHtml(p.id) + '">Edit</button>' +
+          '<button type="button" class="btn btn-sm btn-toggle" data-id="' + escapeHtml(p.id) + '" data-published="' + p.published + '">' + pubBtn + '</button>' +
+          '<button type="button" class="btn btn-sm btn-danger btn-delete" data-id="' + escapeHtml(p.id) + '" data-name="' + escapeHtml(p.name) + '">Delete</button>' +
+        '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  async function loadProducts() {
+    setText($('dashboard-error'), '');
+    showEl($('products-loading'), true);
+    showEl($('products-empty'), false);
+    showEl($('products-table-wrap'), false);
+
+    try {
+      products = await API.fetchAllProducts();
+      renderProducts();
+    } catch (err) {
+      showEl($('products-loading'), false);
+      if (isAuthError(err)) {
+        API.signOut();
+        setText($('login-error'), 'Session expired. Please sign in again.');
+        showView('login');
+        return;
+      }
+      setText($('dashboard-error'), err.message || 'Failed to load products.');
+    }
+  }
+
+  /* ---- Modal ---- */
+
+  function updateImagePreview() {
+    var url = ($('product-image').value || '').trim();
+    var wrap = $('image-preview-wrap');
+    var img = $('image-preview');
+    var empty = $('image-preview-empty');
+    img.classList.remove('show');
+    wrap.classList.remove('has-image');
+    if (!url || !/^https?:\/\//i.test(url)) {
+      empty.textContent = 'Preview appears when the URL loads';
+      img.removeAttribute('src');
+      return;
+    }
+    empty.textContent = 'Loading preview…';
+    img.onload = function () {
+      img.classList.add('show');
+      wrap.classList.add('has-image');
+      empty.textContent = '';
+    };
+    img.onerror = function () {
+      img.classList.remove('show');
+      wrap.classList.remove('has-image');
+      empty.textContent = 'Could not load image — check the URL is public HTTPS';
+      img.removeAttribute('src');
+    };
+    img.src = url;
+  }
+
+  function openModal(product) {
+    var isEdit = !!product;
+    $('modal-title').textContent = isEdit ? 'Edit product' : 'Add product';
+    $('product-id').value = isEdit ? product.id : '';
+    $('product-sku').value = isEdit ? product.sku : '';
+    $('product-sku').readOnly = isEdit;
+    $('product-category').value = isEdit ? product.category : 'general';
+    $('product-name').value = isEdit ? product.name : '';
+    $('product-description').value = isEdit ? product.description : '';
+    $('product-price').value = isEdit ? product.price : 0;
+    $('product-stock').value = isEdit ? product.stock : 0;
+    $('product-badge').value = isEdit ? product.badge : '';
+    $('product-image').value = isEdit ? product.imageUrl : '';
+    $('product-published').checked = isEdit ? product.published : true;
+    $('product-sort').value = isEdit ? product.sortOrder : 0;
+    setText($('modal-error'), '');
+    showEl($('product-modal'), true);
+    updateImagePreview();
+    $('product-sku').focus();
+  }
+
+  function closeModal() {
+    showEl($('product-modal'), false);
+    $('product-form').reset();
+    $('product-sku').readOnly = false;
+    updateImagePreview();
+  }
+
+  function getFormProduct() {
+    return {
+      id: $('product-id').value || undefined,
+      sku: $('product-sku').value.trim(),
+      category: $('product-category').value.trim() || 'general',
+      name: $('product-name').value.trim(),
+      description: $('product-description').value.trim(),
+      price: parseFloat($('product-price').value) || 0,
+      stock: parseInt($('product-stock').value, 10) || 0,
+      badge: $('product-badge').value.trim(),
+      imageUrl: $('product-image').value.trim(),
+      published: $('product-published').checked,
+      sortOrder: parseInt($('product-sort').value, 10) || 0,
+    };
+  }
+
+  /* ---- Auth ---- */
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    var btn = $('login-btn');
+    var email = $('login-email').value.trim();
+    var password = $('login-password').value;
+    setText($('login-error'), '');
+    btn.disabled = true;
+    btn.textContent = 'Signing in...';
+
+    try {
+      await API.signIn(email, password);
+      showView('dashboard');
+      await loadProducts();
+    } catch (err) {
+      setText($('login-error'), err.message || 'Sign in failed.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Sign in';
+    }
+  }
+
+  function handleSignOut() {
+    API.signOut();
+    setText($('login-error'), '');
+    $('login-form').reset();
+    showView('login');
+  }
+
+  /* ---- Event wiring ---- */
+
+  $('login-form').addEventListener('submit', handleLogin);
+  $('signout-btn').addEventListener('click', handleSignOut);
+
+  $('product-image').addEventListener('input', updateImagePreview);
+  $('product-image').addEventListener('change', updateImagePreview);
+
+  $('add-product-btn').addEventListener('click', function () { openModal(null); });
+  $('add-first-btn').addEventListener('click', function () { openModal(null); });
+  $('modal-close').addEventListener('click', closeModal);
+  $('cancel-product-btn').addEventListener('click', closeModal);
+  $('product-modal').addEventListener('click', function (e) {
+    if (e.target === $('product-modal')) closeModal();
+  });
+
+  $('product-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var btn = $('save-product-btn');
+    setText($('modal-error'), '');
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+
+    try {
+      await API.upsertProduct(getFormProduct());
+      closeModal();
+      await loadProducts();
+    } catch (err) {
+      setText($('modal-error'), err.message || 'Save failed.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Save';
+    }
+  });
+
+  $('products-tbody').addEventListener('click', async function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var id = btn.getAttribute('data-id');
+    if (!id) return;
+
+    if (btn.classList.contains('btn-edit')) {
+      var product = products.find(function (p) { return p.id === id; });
+      if (product) openModal(product);
+      return;
+    }
+
+    if (btn.classList.contains('btn-toggle')) {
+      var published = btn.getAttribute('data-published') === 'true';
+      btn.disabled = true;
+      try {
+        await API.setPublished(id, !published);
+        await loadProducts();
+      } catch (err) {
+        setText($('dashboard-error'), err.message || 'Update failed.');
+      } finally {
+        btn.disabled = false;
+      }
+      return;
+    }
+
+    if (btn.classList.contains('btn-delete')) {
+      var name = btn.getAttribute('data-name') || 'this product';
+      if (!confirm('Delete "' + name + '"? This cannot be undone.')) return;
+      btn.disabled = true;
+      try {
+        await API.deleteProduct(id);
+        await loadProducts();
+      } catch (err) {
+        setText($('dashboard-error'), err.message || 'Delete failed.');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !$('product-modal').classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+
+  /* ---- Boot ---- */
+
+  async function boot() {
+    if (!API.configured()) {
+      showView('config');
+      return;
+    }
+
+    if (API.getSession()) {
+      showView('dashboard');
+      await loadProducts();
+    } else {
+      showView('login');
+    }
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
