@@ -16,21 +16,27 @@ This document covers domain, deploy, and the **admin-managed shop catalog** (Sup
 
 ### Vercel settings (fixes `404: NOT_FOUND`)
 
-The live site is **only** under `deploy/`. Repo root has no `index.html`, so a default Vercel project returns `NOT_FOUND` on `/`.
-
-In the Vercel project → **Settings → General / Build & Development**:
+Canonical project: **`deploy`** (team *MARLLONE MAYIEKA's projects*), Git repo `43industries/new-43`.
 
 | Setting | Value |
 |---------|--------|
-| Framework Preset | **Other** (not Next.js) |
-| Root Directory | leave empty **or** set to `deploy` |
-| Build Command | empty / disabled |
-| Output Directory | `deploy` if Root Directory is empty; leave empty if Root Directory is `deploy` |
-| Install Command | empty / disabled |
+| Framework Preset | **Other** |
+| Root Directory | **`deploy`** |
+| Build / Install / Output | empty |
 
-Repo root [`vercel.json`](vercel.json) sets `framework: null` and `outputDirectory: "deploy"`. If the dashboard has **Override** toggles on, turn them off so `vercel.json` applies — or set the table above manually and redeploy.
+Production aliases: `https://deploy-navy-ten.vercel.app` · domains **43industries.com** + **www** are attached on Vercel.
 
-Do **not** point this production project at `43-industries/` (that Next app is secondary). After changing settings, **Redeploy** the latest `main` commit.
+**DNS (still required at the registrar):** nameservers are GoDaddy (`ns63/ns64.domaincontrol.com`). Until records point at Vercel, the apex keeps serving the old GoDaddy page (`DPS/2.0.0`). In GoDaddy DNS for `43industries.com`:
+
+| Type | Name | Value |
+|------|------|--------|
+| A | `@` | `216.198.79.1` |
+| A | `@` | `64.29.17.1` |
+| CNAME | `www` | `cname.vercel-dns.com` |
+
+Remove the old A records (`76.223.105.230`, `13.248.243.5`) and any GoDaddy website/forwarding that overrides DNS. After TTL, both apex and www should hit the `deploy` project.
+
+Do **not** point this production project at `43-industries/` (that Next app is secondary).
 
 ## Shop catalog (Supabase)
 
