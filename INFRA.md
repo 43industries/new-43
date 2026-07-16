@@ -14,6 +14,24 @@ This document covers domain, deploy, and the **admin-managed shop catalog** (Sup
 - Keep **one** canonical production project; document which Vercel project owns the custom domain.
 - Public site: `/` (`index.html`). Admin catalog: `/admin.html` (not linked in the public nav — bookmark it).
 
+### Vercel settings (fixes `404: NOT_FOUND`)
+
+The live site is **only** under `deploy/`. Repo root has no `index.html`, so a default Vercel project returns `NOT_FOUND` on `/`.
+
+In the Vercel project → **Settings → General / Build & Development**:
+
+| Setting | Value |
+|---------|--------|
+| Framework Preset | **Other** (not Next.js) |
+| Root Directory | leave empty **or** set to `deploy` |
+| Build Command | empty / disabled |
+| Output Directory | `deploy` if Root Directory is empty; leave empty if Root Directory is `deploy` |
+| Install Command | empty / disabled |
+
+Repo root [`vercel.json`](vercel.json) sets `framework: null` and `outputDirectory: "deploy"`. If the dashboard has **Override** toggles on, turn them off so `vercel.json` applies — or set the table above manually and redeploy.
+
+Do **not** point this production project at `43-industries/` (that Next app is secondary). After changing settings, **Redeploy** the latest `main` commit.
+
 ## Shop catalog (Supabase)
 
 The shop no longer uses hardcoded products. Catalog + stock live in Supabase.
