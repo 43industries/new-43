@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1f24"/>
+      <stop offset="100%" stop-color="#14161a"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a5d73" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#4a5d73" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#9bb4d0" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#9bb4d0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="210" rx="150" ry="150" fill="url(#glow)"/>
+  <rect x="129" y="51" width="142" height="282" rx="30" fill="rgba(0,0,0,0.35)"/>
+  <rect x="131" y="53" width="138" height="278" rx="28" fill="url(#body)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+  <rect x="139" y="61" width="122" height="262" rx="20" fill="#14161a"/>
+  <rect x="161" y="73" width="78" height="22" rx="11" fill="#050506"/>
+  <circle cx="200" cy="171.04" r="18" fill="none" stroke="#9bb4d0" stroke-width="2" opacity="0.55"/>
+  <text x="200" y="359" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-size="13" font-weight="600" fill="#f0ebe6" letter-spacing="1">iPhone 15 Pro</text>
+</svg>
