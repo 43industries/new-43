@@ -795,6 +795,42 @@ html.world-open,body.world-open{overflow:hidden !important}
 .ft-road-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
 .ft-road-col li{font-size:11px;line-height:1.6;color:var(--white-dim);padding-left:12px;border-left:2px solid rgba(255,106,0,.35)}
 .ft-road-note{font-size:10px;line-height:1.7;color:var(--white-dim);opacity:.75;margin-bottom:8px;font-style:italic}
+/* Fintech FX board + rails */
+.ft-fx-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:12px}
+.ft-fx-card{background:rgba(28,31,36,0.88);border:1px solid var(--border);border-radius:4px;padding:18px 14px 14px;text-align:center;backdrop-filter:blur(8px);transition:border-color .3s,box-shadow .3s}
+.ft-fx-card:hover{border-color:rgba(155,92,255,.5);box-shadow:0 0 20px rgba(155,92,255,.12)}
+.ft-fx-pair{font-family:'Orbitron',monospace;font-size:12px;font-weight:900;color:var(--div-ft);letter-spacing:1px;margin-bottom:6px}
+.ft-fx-rate{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:var(--white);margin-bottom:4px}
+.ft-fx-delta{font-size:10px;font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+.ft-fx-delta.up{color:var(--orange)}.ft-fx-delta.down{color:var(--red)}.ft-fx-delta.flat{color:var(--white-dim)}
+.ft-fx-card canvas{width:100%;height:36px;display:block}
+.ft-rail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:8px}
+.ft-rail-card{padding:20px 16px;border:1px solid var(--border);border-radius:var(--radius-panel);background:rgba(28,31,36,0.88);text-align:center;transition:border-color .3s,transform .3s}
+.ft-rail-card:hover{border-color:rgba(155,92,255,.45);transform:translateY(-3px)}
+.ft-rail-icon{width:56px;height:56px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center}
+.ft-rail-icon svg{width:48px;height:48px}
+.ft-rail-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);margin-bottom:4px}
+.ft-rail-meta{font-size:10px;color:var(--white-dim);line-height:1.5}
+.ft-rail-status{display:inline-block;margin-top:10px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--div-ft);border:1px solid rgba(155,92,255,.35);padding:3px 8px;border-radius:9999px}
+.ft-rail-status.warn{color:var(--orange);border-color:rgba(255,106,0,.4)}
+.ft-rail-metrics{font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--white-dim);margin-top:8px;letter-spacing:.5px}
+.ft-handoff{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin:28px 0 8px;padding:20px;border:1px solid var(--border);border-radius:var(--radius-panel);background:rgba(28,31,36,.88)}
+.ft-handoff-node{padding:14px 12px;border:1px solid rgba(155,92,255,.3);border-radius:4px;background:rgba(20,22,26,.7);text-align:center}
+.ft-handoff-node strong{display:block;font-size:11px;color:var(--div-ft);margin-bottom:4px}
+.ft-handoff-node span{font-size:10px;color:var(--white-dim);line-height:1.5}
+.ft-handoff-arrow{font-family:'Orbitron',monospace;color:var(--orange);font-size:14px;opacity:.8}
+.ft-stack-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px}
+.ft-stack-flow-item{padding:16px 12px;border:1px solid var(--border);border-radius:4px;background:rgba(28,31,36,.88);position:relative;text-align:center}
+.ft-stack-flow-item::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--div-ft);font-size:12px;z-index:1}
+.ft-stack-flow-item:last-child::after{display:none}
+.ft-stack-flow-item .n{font-family:'Orbitron',monospace;font-size:11px;color:var(--div-ft);margin-bottom:6px}
+.ft-stack-flow-item .t{font-size:11px;font-weight:700;color:var(--white);margin-bottom:4px}
+.ft-stack-flow-item .d{font-size:9px;color:var(--white-dim);line-height:1.5}
+.ft-comp-flags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ft-comp-flag{font-size:10px;padding:6px 10px;border:1px solid var(--border);border-radius:4px;color:var(--white-dim);font-family:'JetBrains Mono',monospace}
+.ft-comp-flag.pass{border-color:rgba(46,230,214,.4);color:var(--div-da)}
+.ft-comp-flag.hold{border-color:rgba(255,106,0,.45);color:var(--orange)}
+.ft-comp-flag.fail{border-color:rgba(255,80,80,.45);color:var(--red)}
 .ft-svc-intro{font-size:12px;line-height:1.85;color:var(--white-dim);margin-bottom:28px;max-width:64ch}
 .ft-corridor-wrap{margin-bottom:40px;border:1px solid var(--border);border-radius:var(--radius-panel);overflow:hidden;background:rgba(28,31,36,0.88)}
 .ft-corridor-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
@@ -819,8 +855,13 @@ html.world-open,body.world-open{overflow:hidden !important}
 .ft-step-t{font-size:12px;font-weight:700;color:var(--white);margin-bottom:4px}
 .ft-step-d{font-size:10px;line-height:1.6;color:var(--white-dim)}
 @media(max-width:960px){
-  .ft-about-points,.ft-flow,.ft-roadmap,.ft-steps,.ft-service ul{grid-template-columns:1fr}
+  .ft-about-points,.ft-flow,.ft-roadmap,.ft-steps,.ft-service ul,.ft-fx-grid,.ft-rail-grid,.ft-stack-flow{grid-template-columns:1fr 1fr}
+  .ft-handoff{grid-template-columns:1fr;text-align:center}
+  .ft-handoff-arrow{transform:rotate(90deg);justify-self:center}
   .ft-corridor-table{display:block;overflow-x:auto}
+}
+@media(max-width:600px){
+  .ft-fx-grid,.ft-rail-grid,.ft-about-points,.ft-flow,.ft-roadmap,.ft-steps,.ft-stack-flow{grid-template-columns:1fr}
 }
 .dw-code-block{background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:56px}
 .dw-code-bar{background:var(--bg3);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:6px}
@@ -1324,7 +1365,7 @@ body.world-metals-active #matrix{opacity:.05}
           <span class="door-tag">banking API</span>
           <span class="door-tag door-tag-more">+ Ebby</span>
         </div>
-        <div class="door-live-strip">save vs SWIFT: <strong id="door-fintech-save">$24.68</strong> · avg 3.5s</div>
+        <div class="door-live-strip">USD/KES <strong id="door-fintech-fx">—</strong> · save <strong id="door-fintech-save">$24.68</strong> · <span id="door-fintech-settle">3.5s</span></div>
         <div class="door-cta door-cta-fintech">Enter Fintech</div>
       </div>
     </div>
@@ -1820,10 +1861,10 @@ body.world-metals-active #matrix{opacity:.05}
       <p class="dw-tagline">The control plane for money at 43 Industries — collect, settle, pay out, and produce the compliance evidence that Digital Assets and Metals &amp; Markets rely on. Built in Nairobi for East African corridors and the diaspora that funds them.</p>
     </div>
     <div class="dw-stats-bar">
-      <div class="dw-stat"><div class="dw-stat-val">50+</div><div class="dw-stat-label">corridors &amp; markets</div></div>
-      <div class="dw-stat"><div class="dw-stat-val">&lt;5s</div><div class="dw-stat-label">target settlement</div></div>
-      <div class="dw-stat"><div class="dw-stat-val">3.5×</div><div class="dw-stat-label">fee edge vs SWIFT</div></div>
-      <div class="dw-stat"><div class="dw-stat-val">99.9%</div><div class="dw-stat-label">uptime target</div></div>
+      <div class="dw-stat"><div class="dw-stat-val" id="ftStatCorridors">50+</div><div class="dw-stat-label">corridors &amp; markets</div></div>
+      <div class="dw-stat"><div class="dw-stat-val" id="ftStatSettle">&lt;5s</div><div class="dw-stat-label">target settlement</div></div>
+      <div class="dw-stat"><div class="dw-stat-val" id="ftStatFx">129.4</div><div class="dw-stat-label">USD → KES mid</div></div>
+      <div class="dw-stat"><div class="dw-stat-val" id="ftStatUptime">99.9%</div><div class="dw-stat-label">uptime target</div></div>
     </div>
     <div class="dw-tab-bar">
       <div class="dw-tab active" onclick="switchWorldTab('ft','overview')">Overview</div>
@@ -1845,6 +1886,58 @@ body.world-metals-active #matrix{opacity:.05}
           <div class="ft-about-point"><strong>Built for</strong><span>Diaspora desks, PSPs, SACCOs/MFIs, and teams embedding payments into their product.</span></div>
         </div>
       </div>
+
+      <div class="ft-section-label">Live corridor FX</div>
+      <div class="ft-fx-grid" id="ftFxGrid">
+        <div class="ft-fx-card" data-pair="USD-KES"><div class="ft-fx-pair">USD → KES</div><div class="ft-fx-rate" id="fx-USD-KES">129.40</div><div class="ft-fx-delta flat" id="fxd-USD-KES">indicative</div><canvas id="fxc-USD-KES"></canvas></div>
+        <div class="ft-fx-card" data-pair="GBP-KES"><div class="ft-fx-pair">GBP → KES</div><div class="ft-fx-rate" id="fx-GBP-KES">163.00</div><div class="ft-fx-delta flat" id="fxd-GBP-KES">indicative</div><canvas id="fxc-GBP-KES"></canvas></div>
+        <div class="ft-fx-card" data-pair="EUR-KES"><div class="ft-fx-pair">EUR → KES</div><div class="ft-fx-rate" id="fx-EUR-KES">141.00</div><div class="ft-fx-delta flat" id="fxd-EUR-KES">indicative</div><canvas id="fxc-EUR-KES"></canvas></div>
+        <div class="ft-fx-card" data-pair="USD-NGN"><div class="ft-fx-pair">USD → NGN</div><div class="ft-fx-rate" id="fx-USD-NGN">1,580</div><div class="ft-fx-delta flat" id="fxd-USD-NGN">indicative</div><canvas id="fxc-USD-NGN"></canvas></div>
+        <div class="ft-fx-card" data-pair="USD-GHS"><div class="ft-fx-pair">USD → GHS</div><div class="ft-fx-rate" id="fx-USD-GHS">14.20</div><div class="ft-fx-delta flat" id="fxd-USD-GHS">indicative</div><canvas id="fxc-USD-GHS"></canvas></div>
+      </div>
+      <p class="live-feed-note" style="font-size:10px;color:var(--white-dim);margin-bottom:28px;line-height:1.7;opacity:.82;border-left:2px solid var(--border);padding-left:12px">Indicative mid-market rates for demo · refreshed ~60s when live feed is available · <span style="color:var(--div-ft)" id="ftFxMode">seeded</span> — not a quote.</p>
+
+      <div class="ft-section-label">Payout rails</div>
+      <div class="ft-rail-grid" id="ftRailGrid">
+        <div class="ft-rail-card" data-rail="mpesa">
+          <div class="ft-rail-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="6" stroke="#9b5cff" stroke-width="1.6"/><path d="M14 22h20M14 28h12" stroke="#9b5cff" stroke-width="1.6" stroke-linecap="round"/><circle cx="34" cy="28" r="3" fill="#9b5cff" opacity=".7"/></svg></div>
+          <div class="ft-rail-name">M-Pesa</div>
+          <div class="ft-rail-meta">Kenya last-mile · instant wallet credit</div>
+          <span class="ft-rail-status" data-rail-status>Online</span>
+          <div class="ft-rail-metrics"><span data-rail-lat>~1.2s</span> · <span data-rail-ok>99.8%</span></div>
+        </div>
+        <div class="ft-rail-card" data-rail="bank">
+          <div class="ft-rail-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="32" height="22" rx="3" stroke="#9b5cff" stroke-width="1.6"/><path d="M8 22h32" stroke="#9b5cff" stroke-width="1.6"/><path d="M14 30h8" stroke="#9b5cff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="ft-rail-name">Bank rails</div>
+          <div class="ft-rail-meta">RTGS / ACH-style · account payout</div>
+          <span class="ft-rail-status" data-rail-status>Online</span>
+          <div class="ft-rail-metrics"><span data-rail-lat>~2.8s</span> · <span data-rail-ok>99.5%</span></div>
+        </div>
+        <div class="ft-rail-card" data-rail="airtel">
+          <div class="ft-rail-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="14" y="6" width="20" height="36" rx="4" stroke="#9b5cff" stroke-width="1.6"/><circle cx="24" cy="34" r="2" fill="#9b5cff"/><path d="M18 14h12" stroke="#9b5cff" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="ft-rail-name">Airtel Money</div>
+          <div class="ft-rail-meta">Regional mobile money · dual SIM corridors</div>
+          <span class="ft-rail-status" data-rail-status>Online</span>
+          <div class="ft-rail-metrics"><span data-rail-lat>~1.6s</span> · <span data-rail-ok>99.6%</span></div>
+        </div>
+        <div class="ft-rail-card" data-rail="mtn">
+          <div class="ft-rail-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M10 30c6-10 22-10 28 0" stroke="#9b5cff" stroke-width="1.6" stroke-linecap="round"/><path d="M14 34c4-6 16-6 20 0" stroke="#9b5cff" stroke-width="1.6" stroke-linecap="round"/><circle cx="24" cy="20" r="5" stroke="#9b5cff" stroke-width="1.6"/></svg></div>
+          <div class="ft-rail-name">MTN MoMo</div>
+          <div class="ft-rail-meta">West Africa payout · trade corridors</div>
+          <span class="ft-rail-status" data-rail-status>Online</span>
+          <div class="ft-rail-metrics"><span data-rail-lat>~1.9s</span> · <span data-rail-ok>99.4%</span></div>
+        </div>
+      </div>
+
+      <div class="ft-section-label">Division handoff</div>
+      <div class="ft-handoff" aria-label="Fintech feeds Digital Assets and Metals">
+        <div class="ft-handoff-node"><strong>Fintech</strong><span>Collect · settle · fiat evidence</span></div>
+        <div class="ft-handoff-arrow" aria-hidden="true">→</div>
+        <div class="ft-handoff-node"><strong>Digital Assets</strong><span>On-chain settle · custody policy</span></div>
+        <div class="ft-handoff-arrow" aria-hidden="true">→</div>
+        <div class="ft-handoff-node"><strong>Metals &amp; Markets</strong><span>Vault · broker · reporting books</span></div>
+      </div>
+      <p class="live-feed-note" style="font-size:10px;color:var(--white-dim);margin-bottom:28px;line-height:1.7;opacity:.82;border-left:2px solid var(--border);padding-left:12px">Fiat legs, fees, and audit trails from Fintech reconcile into sister divisions — one control plane for the group.</p>
 
       <div class="ft-section-label">Products today</div>
       <div class="dw-grid">
@@ -1900,7 +1993,13 @@ body.world-metals-active #matrix{opacity:.05}
     </div>
     <!-- STACK -->
     <div class="dw-panel" id="ft-stack">
-      <p class="dw-stack-intro"><span style="color:var(--orange)">#</span> Fintech is the base control plane: money movement, policy, and evidence generation for the other two divisions. Components below are illustrative; production topology depends on your corridor and licensing.</p>
+      <p class="dw-stack-intro"><span style="color:var(--orange)">#</span> Fintech is the base control plane: money movement, policy, and evidence generation for the other two divisions. Topology below is illustrative; production depends on corridor and licensing.</p>
+      <div class="ft-stack-flow" aria-hidden="true">
+        <div class="ft-stack-flow-item"><div class="n">L1</div><div class="t">Rails ingress</div><div class="d">M-Pesa · bank · cards</div></div>
+        <div class="ft-stack-flow-item"><div class="n">L2</div><div class="t">Core platform</div><div class="d">API · ledger · events</div></div>
+        <div class="ft-stack-flow-item"><div class="n">L3</div><div class="t">Compliance</div><div class="d">KYC · AML · TM</div></div>
+        <div class="ft-stack-flow-item"><div class="n">L4</div><div class="t">Observability</div><div class="d">SLO · audit · alerts</div></div>
+      </div>
       <div class="dw-grid">
         <div class="dw-card"><div class="dw-card-header"><div class="dw-card-icon">05</div><div class="dw-card-title">Layer 1 · rails_ingress</div></div><div class="dw-card-body"><p class="dw-card-desc">Last-mile money-in and money-out: mobile money, bank files, cards, and partner switches. Normalized into internal payment intents.</p><ul class="dw-card-features"><li><span class="fhigh">mobile_money</span> — M-Pesa, Airtel, MTN adapters</li><li><span class="fhigh">bank_rails</span> — ACH-style / RTGS hand-offs</li><li><span class="fhigh">acceptance</span> — cards &amp; checkout orchestration</li></ul></div></div>
         <div class="dw-card"><div class="dw-card-header"><div class="dw-card-icon">06</div><div class="dw-card-title">Layer 2 · core_platform</div></div><div class="dw-card-body"><p class="dw-card-desc">API gateway, ledger, and event fabric. Idempotent commands, balances, and settlement state shared with Crypto and Metals reporting.</p><ul class="dw-card-features"><li><span class="fhigh">api_gateway</span> — auth, rate limits, versioning</li><li><span class="fhigh">ledger</span> — double-entry money records</li><li><span class="fhigh">events</span> — webhooks &amp; async bus</li></ul></div></div>
@@ -1914,10 +2013,12 @@ body.world-metals-active #matrix{opacity:.05}
         <div class="tool-header">Fee calculator</div>
         <div class="tool-body">
           <div class="tool-row">
-            <div class="tool-input-group"><div class="tool-label">Amount (USD)</div><input class="tool-input" id="ftFeeAmt" type="number" value="1000" min="1" oninput="calcFee()"/></div>
+            <div class="tool-input-group"><div class="tool-label">Send amount</div><input class="tool-input" id="ftFeeAmt" type="number" value="1000" min="1" oninput="calcFee()"/></div>
             <div class="tool-input-group"><div class="tool-label">Corridor</div><select class="tool-select" id="ftFeeCorridor" onchange="calcFee()"><option value="USD-KES">USD → KES</option><option value="USD-NGN">USD → NGN</option><option value="USD-GHS">USD → GHS</option><option value="GBP-KES">GBP → KES</option><option value="EUR-KES">EUR → KES</option></select></div>
           </div>
           <div class="tool-output" id="ftFeeOutput">
+            <div class="tool-output-row"><span class="tok">FX rate</span><span class="tov" id="ftFeeRate">129.40</span></div>
+            <div class="tool-output-row"><span class="tok">Recipient receives</span><span class="tov" id="ftFeeReceive">—</span></div>
             <div class="tool-output-row"><span class="tok">43 Industries fee</span><span class="tov" id="ftFee43">$0.32</span></div>
             <div class="tool-output-row"><span class="tok">SWIFT wire estimate</span><span class="tov" style="color:var(--red)" id="ftFeeSwift">$25.00</span></div>
             <div class="tool-output-row"><span class="tok">You save</span><span class="tov" id="ftFeeSave">$24.68</span></div>
@@ -1938,40 +2039,84 @@ body.world-metals-active #matrix{opacity:.05}
       <div class="tool-block">
         <div class="tool-header">API playground</div>
         <div class="tool-body">
-          <div class="api-endpoint" onclick="this.classList.toggle('open')"><span class="api-method post">POST</span><span class="api-path">/v1/payments/send</span><div class="api-response">{
-  "status": "settled",
-  "tx_id": "TX-43-8f2a91bc",
-  "amount": 500.00,
-  "currency": "USD",
-  "recipient": "KES_WALLET_0x4f3...",
-  "rail": "ripplenet",
-  "fee_usd": 0.0012,
-  "elapsed_ms": 3200,
-  "timestamp": "2026-04-22T14:30:00Z"
-}</div></div>
-          <div class="api-endpoint" onclick="this.classList.toggle('open')"><span class="api-method get">GET</span><span class="api-path">/v1/payments/{tx_id}/status</span><div class="api-response">{
-  "tx_id": "TX-43-8f2a91bc",
-  "status": "confirmed",
-  "confirmations": 3,
-  "block_height": 84291033,
-  "finality": "irreversible",
-  "elapsed_since_init_ms": 4200
-}</div></div>
-          <div class="api-endpoint" onclick="this.classList.toggle('open')"><span class="api-method get">GET</span><span class="api-path">/v1/accounts/balance</span><div class="api-response">{
-  "account_id": "ACC-43-PROD-001",
-  "balances": [
-    { "currency": "USD", "available": 24500.00 },
-    { "currency": "KES", "available": 3170100.00 },
-    { "currency": "XRP", "available": 12400.00 }
-  ],
-  "last_tx": "2026-04-22T14:30:00Z"
-}</div></div>
+          <p style="font-size:10px;color:var(--white-dim);margin-bottom:12px;line-height:1.6">Sample responses mirror the fee calculator amount &amp; corridor (demo only).</p>
+          <div class="api-endpoint open" id="ftApiSend" onclick="this.classList.toggle('open')"><span class="api-method post">POST</span><span class="api-path">/v1/payments/send</span><pre class="api-response" id="ftApiSendBody"></pre></div>
+          <div class="api-endpoint" onclick="this.classList.toggle('open')"><span class="api-method get">GET</span><span class="api-path">/v1/payments/{tx_id}/status</span><pre class="api-response" id="ftApiStatusBody"></pre></div>
+          <div class="api-endpoint" onclick="this.classList.toggle('open')"><span class="api-method get">GET</span><span class="api-path">/v1/accounts/balance</span><pre class="api-response" id="ftApiBalanceBody"></pre></div>
+        </div>
+      </div>
+      <div class="tool-block">
+        <div class="tool-header">micro_pension.project()</div>
+        <div class="tool-body">
+          <div class="tool-row">
+            <div class="tool-input-group"><div class="tool-label">Monthly contribution (USD)</div><input class="tool-input" id="ftPenAmt" type="number" value="50" min="1" oninput="calcPension()"/></div>
+            <div class="tool-input-group"><div class="tool-label">Years</div><input class="tool-input" id="ftPenYears" type="number" value="10" min="1" max="40" oninput="calcPension()"/></div>
+            <div class="tool-input-group"><div class="tool-label">Employer match %</div><input class="tool-input" id="ftPenMatch" type="number" value="50" min="0" max="100" oninput="calcPension()"/></div>
+          </div>
+          <div class="tool-output">
+            <div class="tool-output-row"><span class="tok">Your contributions</span><span class="tov" id="ftPenOwn">—</span></div>
+            <div class="tool-output-row"><span class="tok">Employer match</span><span class="tov" id="ftPenEmp">—</span></div>
+            <div class="tool-output-row"><span class="tok">Projected balance (6% p.a.)</span><span class="tov" id="ftPenTotal">—</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="tool-block">
+        <div class="tool-header">investment_sleeve.allocate()</div>
+        <div class="tool-body">
+          <div class="tool-row">
+            <div class="tool-input-group"><div class="tool-label">Principal (USD)</div><input class="tool-input" id="ftInvAmt" type="number" value="5000" min="100" oninput="calcInvest()"/></div>
+            <div class="tool-input-group"><div class="tool-label">Risk profile</div><select class="tool-select" id="ftInvRisk" onchange="calcInvest()"><option value="conservative">Conservative</option><option value="balanced" selected>Balanced</option><option value="growth">Growth</option></select></div>
+          </div>
+          <div class="tool-output">
+            <div class="tool-output-row"><span class="tok">Fiat / cash sleeve</span><span class="tov" id="ftInvFiat">—</span></div>
+            <div class="tool-output-row"><span class="tok">Digital Assets handoff</span><span class="tov" id="ftInvCrypto">—</span></div>
+            <div class="tool-output-row"><span class="tok">Metals &amp; Markets handoff</span><span class="tov" id="ftInvMetals">—</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="tool-block">
+        <div class="tool-header">compliance.screen()</div>
+        <div class="tool-body">
+          <div class="tool-row">
+            <div class="tool-input-group"><div class="tool-label">Sender name</div><input class="tool-input" id="ftCompSender" type="text" value="Amina Otieno" oninput=""/></div>
+            <div class="tool-input-group"><div class="tool-label">Recipient corridor</div><select class="tool-select" id="ftCompCorridor"><option value="USD-KES">USD → KES</option><option value="USD-NGN">USD → NGN</option><option value="GBP-KES">GBP → KES</option></select></div>
+            <div class="tool-input-group"><div class="tool-label">Amount (USD)</div><input class="tool-input" id="ftCompAmt" type="number" value="750" min="1"/></div>
+          </div>
+          <button class="tool-btn" onclick="runComplianceScreen()" id="ftCompBtn" style="margin-top:4px">▶ Run screen</button>
+          <div class="ft-comp-flags" id="ftCompFlags" style="margin-top:14px"></div>
+          <div class="tool-output" style="margin-top:12px">
+            <div class="tool-output-row"><span class="tok">Decision</span><span class="tov" id="ftCompDecision">Awaiting screen</span></div>
+            <div class="tool-output-row"><span class="tok">Evidence pack</span><span class="tov" id="ftCompEvidence">—</span></div>
+          </div>
         </div>
       </div>
     </div>
     <!-- SERVICES -->
     <div class="dw-panel" id="ft-services">
       <p class="ft-svc-intro">Fintech is the rails layer for 43 Industries and for partners who need the same stack. Below is what we offer across remittance, APIs, investment infrastructure, pensions, and Ebby Software — our studio for custom apps, portals, and white-label builds — with corridors and compliance designed for East Africa and diaspora hubs. Production availability depends on licensing and corridor readiness in your market.</p>
+
+      <div class="dw-code-block">
+        <div class="dw-code-bar"><div class="dr"></div><div class="dy"></div><div class="dg"></div><span>Fintech — payment intent · settle · payout</span></div>
+        <pre class="dw-code" style="padding:20px 22px;margin:0;font-size:11px;line-height:1.75;overflow-x:auto;color:var(--white-dim)"><span class="kw">async function</span> <span class="fn">sendRemittance</span>(intent) {
+  <span class="kw">const</span> quote = <span class="kw">await</span> rails.<span class="fn">fxQuote</span>(intent.corridor, intent.amount_usd);
+  <span class="kw">const</span> check = <span class="kw">await</span> compliance.<span class="fn">screen</span>(intent.sender, intent.recipient);
+  <span class="kw">if</span> (!check.clear) <span class="kw">throw new</span> <span class="cls">PolicyHold</span>(check.reason);
+
+  <span class="kw">const</span> tx = <span class="kw">await</span> ledger.<span class="fn">post</span>({
+    type: <span class="str">"remit"</span>,
+    amount: intent.amount_usd,
+    fee: quote.fee_usd,
+    payout_rail: intent.rail, <span class="cmt">// mpesa | bank | airtel | mtn</span>
+  });
+
+  <span class="kw">await</span> payout.<span class="fn">dispatch</span>(tx.id, {
+    currency: quote.to_currency,
+    receive: quote.receive_amount,
+  });
+
+  <span class="kw">return</span> { status: <span class="str">"settled"</span>, tx_id: tx.id, elapsed_ms: tx.elapsed };
+}</pre>
+      </div>
 
       <div class="ft-corridor-wrap">
         <div class="ft-corridor-head">
@@ -2082,7 +2227,8 @@ body.world-metals-active #matrix{opacity:.05}
         </div>
         <div class="dw-cta-btns">
           <a href="#contact" class="dw-btn primary" onclick="closeWorld('world-fintech')">Contact partners</a>
-          <a href="#shop" class="dw-btn secondary" onclick="closeWorld('world-fintech')">Browse shop</a>
+          <a href="mailto:partners@43industries.com?subject=Fintech%20corridor%20%2F%20API%20inquiry" class="dw-btn secondary">Email partners@</a>
+          <button type="button" class="dw-btn secondary" onclick="switchWorldTab('ft','tools')">Try tools sandbox</button>
         </div>
       </div>
     </div>
@@ -3234,6 +3380,7 @@ function activateWorld(id) {
   switchWorldTab(meta.prefix, 'overview');
   if (meta.prefix === 'cr') initTickerIfNeeded();
   if (meta.prefix === 'mt') initMetalSpotsIfNeeded();
+  if (meta.prefix === 'ft') ensureFintechFx();
   const closeBtn = el.querySelector('.dw-close');
   if (closeBtn) setTimeout(() => closeBtn.focus({ preventScroll: true }), 50);
 }
@@ -3309,7 +3456,15 @@ function switchWorldTab(prefix, tab) {
   if (panel) panel.classList.add('active');
   if (prefix === 'cr' && tab === 'tools') { initPieIfNeeded(); setCompMetric('tps'); }
   if (prefix === 'mt' && tab === 'tools') { calcMetals(); initMetalSpotsIfNeeded(); }
-  if (prefix === 'ft' && tab === 'tools') calcFee();
+  if (prefix === 'ft') {
+    ensureFintechFx();
+    if (tab === 'tools' || tab === 'overview') {
+      calcFee();
+      calcPension();
+      calcInvest();
+    }
+    tickRailHealth();
+  }
 }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && document.body.classList.contains('world-open')) {
@@ -3338,42 +3493,238 @@ window.addEventListener('popstate', () => {
   if (id) setTimeout(() => openWorld(id), prefersReducedMotion ? 0 : 400);
 })();
 
-// ─── FINTECH: FEE CALCULATOR ──────────────────────────────────────────────────
-const corridorRates = {'USD-KES':129.4,'USD-NGN':1580,'USD-GHS':14.2,'GBP-KES':163,'EUR-KES':141};
+// ─── FINTECH: FX + FEE CALCULATOR + SIM + API ─────────────────────────────────
+const corridorRates = { 'USD-KES': 129.4, 'USD-NGN': 1580, 'USD-GHS': 14.2, 'GBP-KES': 163, 'EUR-KES': 141 };
+const corridorRateBase = { ...corridorRates };
+const fxHistory = { 'USD-KES': [], 'GBP-KES': [], 'EUR-KES': [], 'USD-NGN': [], 'USD-GHS': [] };
+const fxChangePct = { 'USD-KES': 0, 'GBP-KES': 0, 'EUR-KES': 0, 'USD-NGN': 0, 'USD-GHS': 0 };
+let ftFxMode = 'seeded';
+let ftFxStarted = false;
+let lastFtSettleSec = 3.5;
+
+const CORRIDOR_META = {
+  'USD-KES': { from: 'USD', to: 'KES', payout: 'M-Pesa', label: 'USD → KES' },
+  'USD-NGN': { from: 'USD', to: 'NGN', payout: 'Bank / MoMo', label: 'USD → NGN' },
+  'USD-GHS': { from: 'USD', to: 'GHS', payout: 'Bank / MoMo', label: 'USD → GHS' },
+  'GBP-KES': { from: 'GBP', to: 'KES', payout: 'M-Pesa', label: 'GBP → KES' },
+  'EUR-KES': { from: 'EUR', to: 'KES', payout: 'M-Pesa', label: 'EUR → KES' },
+};
+
+function formatFxRate(pair, rate) {
+  if (pair === 'USD-NGN') return Math.round(rate).toLocaleString();
+  return Number(rate).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function pushFxHistory(pair, rate) {
+  const arr = fxHistory[pair];
+  if (!arr) return;
+  arr.push(rate);
+  if (arr.length > 24) arr.shift();
+  if (arr.length >= 2) {
+    const prev = arr[0];
+    fxChangePct[pair] = prev ? ((rate - prev) / prev) * 100 : 0;
+  }
+}
+
+function renderFxBoard() {
+  Object.keys(corridorRates).forEach(pair => {
+    const rateEl = document.getElementById('fx-' + pair);
+    const deltaEl = document.getElementById('fxd-' + pair);
+    const rate = corridorRates[pair];
+    if (rateEl) rateEl.textContent = formatFxRate(pair, rate);
+    if (deltaEl) {
+      const pct = fxChangePct[pair] || 0;
+      deltaEl.classList.remove('up', 'down', 'flat');
+      if (Math.abs(pct) < 0.02) {
+        deltaEl.classList.add('flat');
+        deltaEl.textContent = ftFxMode === 'live' ? 'stable' : 'indicative';
+      } else {
+        deltaEl.classList.add(pct > 0 ? 'up' : 'down');
+        deltaEl.textContent = (pct > 0 ? '▲ +' : '▼ ') + Math.abs(pct).toFixed(2) + '%';
+      }
+    }
+    const hist = fxHistory[pair];
+    if (hist && hist.length >= 2) drawSparkline('fxc-' + pair, hist, '#9b5cff');
+  });
+  const modeEl = document.getElementById('ftFxMode');
+  if (modeEl) modeEl.textContent = ftFxMode;
+}
+
+function seedFxHistory() {
+  Object.keys(corridorRates).forEach(pair => {
+    fxHistory[pair] = [];
+    const base = corridorRates[pair];
+    for (let i = 0; i < 16; i++) {
+      const wobble = 1 + (Math.sin(i / 3) * 0.004) + ((Math.random() - 0.5) * 0.003);
+      pushFxHistory(pair, base * wobble);
+    }
+    corridorRates[pair] = fxHistory[pair][fxHistory[pair].length - 1];
+  });
+  renderFxBoard();
+}
+
+async function fetchLiveFx() {
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/USD', { cache: 'no-store' });
+    if (!res.ok) throw new Error('fx http ' + res.status);
+    const data = await res.json();
+    if (!data || data.result !== 'success' || !data.rates) throw new Error('fx shape');
+    const r = data.rates;
+    if (r.KES) { corridorRates['USD-KES'] = r.KES; pushFxHistory('USD-KES', r.KES); }
+    if (r.NGN) { corridorRates['USD-NGN'] = r.NGN; pushFxHistory('USD-NGN', r.NGN); }
+    if (r.GHS) { corridorRates['USD-GHS'] = r.GHS; pushFxHistory('USD-GHS', r.GHS); }
+    if (r.KES && r.GBP) {
+      const gbpKes = r.KES / r.GBP;
+      corridorRates['GBP-KES'] = gbpKes;
+      pushFxHistory('GBP-KES', gbpKes);
+    }
+    if (r.KES && r.EUR) {
+      const eurKes = r.KES / r.EUR;
+      corridorRates['EUR-KES'] = eurKes;
+      pushFxHistory('EUR-KES', eurKes);
+    }
+    ftFxMode = 'live';
+    renderFxBoard();
+    calcFee();
+    updateDoorCards();
+    return true;
+  } catch (err) {
+    ftFxMode = 'seeded';
+    const modeEl = document.getElementById('ftFxMode');
+    if (modeEl) modeEl.textContent = 'seeded (offline)';
+    console.info('Fintech FX: using seeded rates —', err && err.message ? err.message : err);
+    return false;
+  }
+}
+
+function ensureFintechFx() {
+  if (ftFxStarted) return;
+  ftFxStarted = true;
+  seedFxHistory();
+  fetchLiveFx();
+  tickRailHealth();
+  setInterval(() => { fetchLiveFx(); }, 60000);
+  setInterval(tickRailHealth, 8000);
+}
+
 function calcFee() {
-  const amt = parseFloat(document.getElementById('ftFeeAmt').value) || 0;
-  const corr = document.getElementById('ftFeeCorridor').value;
+  const amtEl = document.getElementById('ftFeeAmt');
+  const corrEl = document.getElementById('ftFeeCorridor');
+  if (!amtEl || !corrEl) return;
+  const amt = parseFloat(amtEl.value) || 0;
+  const corr = corrEl.value;
+  const meta = CORRIDOR_META[corr] || CORRIDOR_META['USD-KES'];
+  const rate = corridorRates[corr] || corridorRateBase[corr] || 129.4;
   const fee43 = Math.max(0.10, amt * 0.00032);
   const feeSwift = 25 + amt * 0.012;
   const save = feeSwift - fee43;
-  const rate = corridorRates[corr] || 129.4;
-  document.getElementById('ftFee43').textContent = formatMoney(fee43);
-  document.getElementById('ftFeeSwift').textContent = formatMoney(feeSwift);
-  document.getElementById('ftFeeSave').textContent = formatMoney(save);
-  document.getElementById('ftFeeTime').textContent = (2.5 + Math.random() * 2).toFixed(1) + 's';
+  const receive = Math.max(0, (amt - fee43) * rate);
+  lastFtSettleSec = 2.8 + (amt % 7) * 0.15;
+
+  const rateEl = document.getElementById('ftFeeRate');
+  const recvEl = document.getElementById('ftFeeReceive');
+  if (rateEl) rateEl.textContent = '1 ' + meta.from + ' = ' + formatFxRate(corr, rate) + ' ' + meta.to;
+  if (recvEl) {
+    recvEl.textContent = meta.to + ' ' + receive.toLocaleString(undefined, {
+      maximumFractionDigits: meta.to === 'NGN' ? 0 : 2,
+      minimumFractionDigits: meta.to === 'NGN' ? 0 : 2,
+    });
+  }
+  const f43 = document.getElementById('ftFee43');
+  const fSw = document.getElementById('ftFeeSwift');
+  const fSv = document.getElementById('ftFeeSave');
+  const fTm = document.getElementById('ftFeeTime');
+  if (f43) f43.textContent = formatMoney(fee43);
+  if (fSw) fSw.textContent = formatMoney(feeSwift);
+  if (fSv) fSv.textContent = formatMoney(save);
+  if (fTm) fTm.textContent = lastFtSettleSec.toFixed(1) + 's';
+  refreshFtApiPlayground(amt, corr, fee43, receive, rate, meta);
 }
 
-// ─── FINTECH: PAYMENT SIMULATOR ───────────────────────────────────────────────
+function refreshFtApiPlayground(amt, corr, fee43, receive, rate, meta) {
+  const sendBody = document.getElementById('ftApiSendBody');
+  const statusBody = document.getElementById('ftApiStatusBody');
+  const balBody = document.getElementById('ftApiBalanceBody');
+  if (!sendBody) return;
+  const txId = 'TX-43-' + Math.abs(Math.floor(amt * 100 + rate)).toString(16).toUpperCase().padStart(8, '0').slice(0, 8);
+  const now = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+  const elapsed = Math.round(lastFtSettleSec * 1000);
+  sendBody.textContent = JSON.stringify({
+    status: 'settled',
+    tx_id: txId,
+    amount: Number(amt.toFixed(2)),
+    currency: meta.from,
+    corridor: corr,
+    recipient: meta.to + '_WALLET',
+    payout_rail: meta.payout.toLowerCase().replace(/[^a-z0-9]+/g, '_'),
+    fx_rate: Number(rate.toFixed(4)),
+    receive_amount: Number(receive.toFixed(meta.to === 'NGN' ? 0 : 2)),
+    receive_currency: meta.to,
+    fee_usd: Number(fee43.toFixed(4)),
+    elapsed_ms: elapsed,
+    timestamp: now,
+  }, null, 2);
+  if (statusBody) {
+    statusBody.textContent = JSON.stringify({
+      tx_id: txId,
+      status: 'confirmed',
+      corridor: corr,
+      payout_rail: meta.payout,
+      finality: 'settled',
+      elapsed_since_init_ms: elapsed + 900,
+    }, null, 2);
+  }
+  if (balBody) {
+    balBody.textContent = JSON.stringify({
+      account_id: 'ACC-43-PROD-001',
+      balances: [
+        { currency: 'USD', available: 24500.0 },
+        { currency: 'KES', available: 3170100.0 },
+        { currency: 'NGN', available: 8500000.0 },
+        { currency: 'GHS', available: 42000.0 },
+      ],
+      last_tx: now,
+    }, null, 2);
+  }
+}
+
 let simRunning = false;
 function runPaymentSim() {
   if (simRunning) return;
   simRunning = true;
   const btn = document.getElementById('ftSimBtn');
+  const body = document.getElementById('ftSimBody');
+  if (!btn || !body) { simRunning = false; return; }
   btn.textContent = 'running...';
   btn.style.opacity = '.5';
-  const body = document.getElementById('ftSimBody');
   body.innerHTML = '';
+
+  const amt = parseFloat(document.getElementById('ftFeeAmt').value) || 500;
+  const corr = document.getElementById('ftFeeCorridor').value || 'USD-KES';
+  const meta = CORRIDOR_META[corr] || CORRIDOR_META['USD-KES'];
+  const rate = corridorRates[corr] || corridorRateBase[corr] || 129.4;
+  const fee43 = Math.max(0.10, amt * 0.00032);
+  const feeSwift = 25 + amt * 0.012;
+  const save = feeSwift - fee43;
+  const receive = Math.max(0, (amt - fee43) * rate);
+  const tx = 'TX-43-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+  const settle = lastFtSettleSec.toFixed(1);
+  const recvFmt = receive.toLocaleString(undefined, {
+    maximumFractionDigits: meta.to === 'NGN' ? 0 : 2,
+    minimumFractionDigits: meta.to === 'NGN' ? 0 : 2,
+  });
+
   const steps = [
-    {text:'Starting transfer — $500 → KES wallet', delay:0, cls:''},
-    {text:'> Connecting settlement network...', delay:400, cls:'sim-step'},
-    {text:'> Route selected: USD → XRP → KES', delay:800, cls:'sim-step'},
-    {text:'> Confirming corridor and FX...', delay:1400, cls:'sim-step'},
-    {text:'> Signing transaction... TX-43-' + Math.random().toString(36).substring(2,8).toUpperCase(), delay:2000, cls:'sim-step'},
-    {text:'> Broadcasting...', delay:2600, cls:'sim-step'},
-    {text:'> Confirmed on ledger', delay:3200, cls:'sim-step'},
-    {text:'> Settlement: COMPLETE', delay:3800, cls:'sim-ok'},
-    {text:'> Elapsed: 3.2s | Fee: $0.0012 | Saved vs SWIFT: $24.68', delay:4200, cls:'sim-ok'},
-    {text:'> Status: SETTLED — funds delivered', delay:4800, cls:'sim-ok'},
+    { text: 'Starting transfer — ' + formatMoney(amt) + ' → ' + meta.to + ' via ' + meta.payout, delay: 0, cls: '' },
+    { text: '> Connecting settlement network...', delay: 400, cls: 'sim-step' },
+    { text: '> Corridor locked: ' + meta.label, delay: 800, cls: 'sim-step' },
+    { text: '> FX mid: 1 ' + meta.from + ' = ' + formatFxRate(corr, rate) + ' ' + meta.to, delay: 1400, cls: 'sim-step' },
+    { text: '> Compliance screen: CLEAR', delay: 2000, cls: 'sim-step' },
+    { text: '> Signing payment intent... ' + tx, delay: 2600, cls: 'sim-step' },
+    { text: '> Dispatching payout rail: ' + meta.payout + '...', delay: 3200, cls: 'sim-step' },
+    { text: '> Settlement: COMPLETE', delay: 3800, cls: 'sim-ok' },
+    { text: '> Delivered ' + meta.to + ' ' + recvFmt + ' · Fee ' + formatMoney(fee43) + ' · Saved vs SWIFT ' + formatMoney(save), delay: 4200, cls: 'sim-ok' },
+    { text: '> Elapsed: ' + settle + 's · Status: SETTLED', delay: 4800, cls: 'sim-ok' },
   ];
   steps.forEach(s => {
     setTimeout(() => {
@@ -3385,6 +3736,115 @@ function runPaymentSim() {
     }, s.delay);
   });
   setTimeout(() => { simRunning = false; btn.textContent = '▶ Run transfer'; btn.style.opacity = '1'; }, 5200);
+}
+
+function updateFtHeroStats() {
+  const fx = document.getElementById('ftStatFx');
+  const settle = document.getElementById('ftStatSettle');
+  if (fx && corridorRates && corridorRates['USD-KES']) {
+    fx.textContent = formatFxRate('USD-KES', corridorRates['USD-KES']);
+  }
+  if (settle) settle.textContent = (typeof lastFtSettleSec === 'number' ? lastFtSettleSec : 3.5).toFixed(1) + 's';
+}
+
+const RAIL_BASE = {
+  mpesa: { lat: 1.2, ok: 99.8 },
+  bank: { lat: 2.8, ok: 99.5 },
+  airtel: { lat: 1.6, ok: 99.6 },
+  mtn: { lat: 1.9, ok: 99.4 },
+};
+
+function tickRailHealth() {
+  document.querySelectorAll('.ft-rail-card[data-rail]').forEach(card => {
+    const key = card.getAttribute('data-rail');
+    const base = RAIL_BASE[key] || { lat: 2, ok: 99.5 };
+    const lat = Math.max(0.8, base.lat + (Math.random() - 0.5) * 0.6);
+    const ok = Math.min(99.95, Math.max(98.8, base.ok + (Math.random() - 0.5) * 0.3));
+    const degraded = lat > base.lat * 1.35 || ok < 99.2;
+    const statusEl = card.querySelector('[data-rail-status]');
+    const latEl = card.querySelector('[data-rail-lat]');
+    const okEl = card.querySelector('[data-rail-ok]');
+    if (latEl) latEl.textContent = '~' + lat.toFixed(1) + 's';
+    if (okEl) okEl.textContent = ok.toFixed(1) + '%';
+    if (statusEl) {
+      statusEl.textContent = degraded ? 'Degraded' : 'Online';
+      statusEl.classList.toggle('warn', degraded);
+    }
+  });
+}
+
+function calcPension() {
+  const monthly = parseFloat(document.getElementById('ftPenAmt')?.value) || 0;
+  const years = parseFloat(document.getElementById('ftPenYears')?.value) || 0;
+  const matchPct = (parseFloat(document.getElementById('ftPenMatch')?.value) || 0) / 100;
+  const months = years * 12;
+  const own = monthly * months;
+  const emp = own * matchPct;
+  const r = 0.06 / 12;
+  const totalMonthly = monthly * (1 + matchPct);
+  let bal = 0;
+  for (let i = 0; i < months; i++) bal = (bal + totalMonthly) * (1 + r);
+  const o = document.getElementById('ftPenOwn');
+  const e = document.getElementById('ftPenEmp');
+  const t = document.getElementById('ftPenTotal');
+  if (o) o.textContent = formatMoney(own);
+  if (e) e.textContent = formatMoney(emp);
+  if (t) t.textContent = formatMoney(bal);
+}
+
+function calcInvest() {
+  const amt = parseFloat(document.getElementById('ftInvAmt')?.value) || 0;
+  const risk = document.getElementById('ftInvRisk')?.value || 'balanced';
+  const mixes = {
+    conservative: { fiat: 0.7, crypto: 0.1, metals: 0.2 },
+    balanced: { fiat: 0.4, crypto: 0.3, metals: 0.3 },
+    growth: { fiat: 0.2, crypto: 0.5, metals: 0.3 },
+  };
+  const m = mixes[risk] || mixes.balanced;
+  const a = document.getElementById('ftInvFiat');
+  const b = document.getElementById('ftInvCrypto');
+  const c = document.getElementById('ftInvMetals');
+  if (a) a.textContent = formatMoney(amt * m.fiat) + ' (' + Math.round(m.fiat * 100) + '%)';
+  if (b) b.textContent = formatMoney(amt * m.crypto) + ' (' + Math.round(m.crypto * 100) + '%)';
+  if (c) c.textContent = formatMoney(amt * m.metals) + ' (' + Math.round(m.metals * 100) + '%)';
+}
+
+function runComplianceScreen() {
+  const sender = (document.getElementById('ftCompSender')?.value || '').trim() || 'Unknown';
+  const corr = document.getElementById('ftCompCorridor')?.value || 'USD-KES';
+  const amt = parseFloat(document.getElementById('ftCompAmt')?.value) || 0;
+  const flagsEl = document.getElementById('ftCompFlags');
+  const decisionEl = document.getElementById('ftCompDecision');
+  const evidenceEl = document.getElementById('ftCompEvidence');
+  const btn = document.getElementById('ftCompBtn');
+  if (btn) { btn.textContent = 'screening...'; btn.style.opacity = '.5'; }
+
+  setTimeout(() => {
+    const flags = [];
+    flags.push({ cls: 'pass', text: 'KYC: identity present' });
+    flags.push({ cls: 'pass', text: 'Sanctions: no hit' });
+    const highAmt = amt >= 3000;
+    const oddName = /test|sanction|blocked/i.test(sender);
+    if (highAmt) flags.push({ cls: 'hold', text: 'TM: amount above corridor soft limit' });
+    else flags.push({ cls: 'pass', text: 'TM: within corridor envelope' });
+    if (oddName) flags.push({ cls: 'fail', text: 'Policy: name watchlist match' });
+    else flags.push({ cls: 'pass', text: 'Policy: jurisdiction OK · ' + corr });
+
+    const failed = flags.some(f => f.cls === 'fail');
+    const held = flags.some(f => f.cls === 'hold');
+    const decision = failed ? 'BLOCK' : held ? 'HOLD — manual review' : 'CLEAR — allow settle';
+    const pack = 'EVD-43-' + Date.now().toString(36).toUpperCase().slice(-7);
+
+    if (flagsEl) {
+      flagsEl.innerHTML = flags.map(f => `<span class="ft-comp-flag ${f.cls}">${f.text}</span>`).join('');
+    }
+    if (decisionEl) {
+      decisionEl.textContent = decision;
+      decisionEl.style.color = failed ? 'var(--red)' : held ? 'var(--orange)' : 'var(--div-da)';
+    }
+    if (evidenceEl) evidenceEl.textContent = pack;
+    if (btn) { btn.textContent = '▶ Run screen'; btn.style.opacity = '1'; }
+  }, 700);
 }
 
 // ─── LIVE MARKETS: CoinGecko (crypto + XAUT/KAG) + copper micro-drift ───────────
@@ -3492,6 +3952,8 @@ function updateDoorCards() {
   const gold = document.getElementById('door-gold');
   const silver = document.getElementById('door-silver');
   const ftSave = document.getElementById('door-fintech-save');
+  const ftFx = document.getElementById('door-fintech-fx');
+  const ftSettle = document.getElementById('door-fintech-settle');
   if (btc && cryptoPrices.BTC) btc.textContent = formatCryptoPrice(cryptoPrices.BTC);
   if (eth && cryptoPrices.ETH) eth.textContent = formatCryptoPrice(cryptoPrices.ETH);
   if (gold && metalSpots.GOLD) gold.textContent = formatMoney(metalSpots.GOLD);
@@ -3502,6 +3964,11 @@ function updateDoorCards() {
     const feeSwift = 25 + amt * 0.012;
     ftSave.textContent = formatMoney(feeSwift - fee43);
   }
+  if (ftFx && corridorRates && corridorRates['USD-KES']) {
+    ftFx.textContent = formatFxRate('USD-KES', corridorRates['USD-KES']);
+  }
+  if (ftSettle) ftSettle.textContent = (typeof lastFtSettleSec === 'number' ? lastFtSettleSec : 3.5).toFixed(1) + 's';
+  updateFtHeroStats();
   rebuildTickerStrip();
 }
 
@@ -3767,6 +4234,11 @@ function initMetalSpotsIfNeeded() { ensureLiveMarkets(); }
 
 // Start live markets on homepage (ticker + division door strips)
 ensureLiveMarkets();
+ensureFintechFx();
+calcFee();
+calcPension();
+calcInvest();
+updateDoorCards();
 </script>
 </body>
 </html>
